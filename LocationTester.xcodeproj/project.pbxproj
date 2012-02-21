@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E55379914F345E500DCDEFE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E55379614F3439A00DCDEFE /* CoreLocation.framework */; };
 		4EE503DF14F1F49E00C5F307 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503DE14F1F49E00C5F307 /* UIKit.framework */; };
 		4EE503E114F1F49E00C5F307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503E014F1F49E00C5F307 /* Foundation.framework */; };
 		4EE503E314F1F49E00C5F307 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503E214F1F49E00C5F307 /* CoreGraphics.framework */; };
@@ -14,34 +15,38 @@
 		4EE503EB14F1F49E00C5F307 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE503EA14F1F49E00C5F307 /* main.m */; };
 		4EE503EF14F1F49E00C5F307 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE503EE14F1F49E00C5F307 /* AppDelegate.m */; };
 		4EE503F214F1F49E00C5F307 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EE503F014F1F49E00C5F307 /* MainStoryboard.storyboard */; };
-		4EE503F514F1F49E00C5F307 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE503F414F1F49E00C5F307 /* FirstViewController.m */; };
 		4EE503F714F1F49E00C5F307 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE503F614F1F49E00C5F307 /* first.png */; };
 		4EE503F914F1F49E00C5F307 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE503F814F1F49E00C5F307 /* first@2x.png */; };
 		4EE503FC14F1F49E00C5F307 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE503FB14F1F49E00C5F307 /* SecondViewController.m */; };
 		4EE503FE14F1F49E00C5F307 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE503FD14F1F49E00C5F307 /* second.png */; };
 		4EE5040014F1F49E00C5F307 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE503FF14F1F49E00C5F307 /* second@2x.png */; };
+		4EE5040814F1F65200C5F307 /* ControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5040714F1F65200C5F307 /* ControlViewController.m */; };
+		4EE5040B14F1FCB400C5F307 /* RegionOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5040A14F1FCB400C5F307 /* RegionOptionsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E55379614F3439A00DCDEFE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4EE503DA14F1F49E00C5F307 /* LocationTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE503DE14F1F49E00C5F307 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4EE503E014F1F49E00C5F307 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4EE503E214F1F49E00C5F307 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		4EE503E614F1F49E00C5F307 /* LocationTester-Info.plist */ = {isa = PBXFileReference; path = "LocationTester-Info.plist"; sourceTree = "<group>"; };
+		4EE503E614F1F49E00C5F307 /* LocationTester-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LocationTester-Info.plist"; sourceTree = "<group>"; };
 		4EE503E814F1F49E00C5F307 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4EE503EA14F1F49E00C5F307 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4EE503EC14F1F49E00C5F307 /* LocationTester-Prefix.pch */ = {isa = PBXFileReference; path = "LocationTester-Prefix.pch"; sourceTree = "<group>"; };
-		4EE503ED14F1F49E00C5F307 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		4EE503EC14F1F49E00C5F307 /* LocationTester-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LocationTester-Prefix.pch"; sourceTree = "<group>"; };
+		4EE503ED14F1F49E00C5F307 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4EE503EE14F1F49E00C5F307 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4EE503F114F1F49E00C5F307 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		4EE503F314F1F49E00C5F307 /* FirstViewController.h */ = {isa = PBXFileReference; path = FirstViewController.h; sourceTree = "<group>"; };
-		4EE503F414F1F49E00C5F307 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		4EE503F614F1F49E00C5F307 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		4EE503F814F1F49E00C5F307 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		4EE503FA14F1F49E00C5F307 /* SecondViewController.h */ = {isa = PBXFileReference; path = SecondViewController.h; sourceTree = "<group>"; };
+		4EE503FA14F1F49E00C5F307 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		4EE503FB14F1F49E00C5F307 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		4EE503FD14F1F49E00C5F307 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		4EE503FF14F1F49E00C5F307 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		4EE5040614F1F65200C5F307 /* ControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlViewController.h; sourceTree = "<group>"; };
+		4EE5040714F1F65200C5F307 /* ControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlViewController.m; sourceTree = "<group>"; };
+		4EE5040914F1FCB400C5F307 /* RegionOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionOptionsViewController.h; sourceTree = "<group>"; };
+		4EE5040A14F1FCB400C5F307 /* RegionOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionOptionsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +57,7 @@
 				4EE503DF14F1F49E00C5F307 /* UIKit.framework in Frameworks */,
 				4EE503E114F1F49E00C5F307 /* Foundation.framework in Frameworks */,
 				4EE503E314F1F49E00C5F307 /* CoreGraphics.framework in Frameworks */,
+				4E55379914F345E500DCDEFE /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +84,7 @@
 		4EE503DD14F1F49E00C5F307 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E55379614F3439A00DCDEFE /* CoreLocation.framework */,
 				4EE503DE14F1F49E00C5F307 /* UIKit.framework */,
 				4EE503E014F1F49E00C5F307 /* Foundation.framework */,
 				4EE503E214F1F49E00C5F307 /* CoreGraphics.framework */,
@@ -90,9 +97,9 @@
 			children = (
 				4EE503ED14F1F49E00C5F307 /* AppDelegate.h */,
 				4EE503EE14F1F49E00C5F307 /* AppDelegate.m */,
+				4EE5040614F1F65200C5F307 /* ControlViewController.h */,
+				4EE5040714F1F65200C5F307 /* ControlViewController.m */,
 				4EE503F014F1F49E00C5F307 /* MainStoryboard.storyboard */,
-				4EE503F314F1F49E00C5F307 /* FirstViewController.h */,
-				4EE503F414F1F49E00C5F307 /* FirstViewController.m */,
 				4EE503F614F1F49E00C5F307 /* first.png */,
 				4EE503F814F1F49E00C5F307 /* first@2x.png */,
 				4EE503FA14F1F49E00C5F307 /* SecondViewController.h */,
@@ -100,6 +107,8 @@
 				4EE503FD14F1F49E00C5F307 /* second.png */,
 				4EE503FF14F1F49E00C5F307 /* second@2x.png */,
 				4EE503E514F1F49E00C5F307 /* Supporting Files */,
+				4EE5040914F1FCB400C5F307 /* RegionOptionsViewController.h */,
+				4EE5040A14F1FCB400C5F307 /* RegionOptionsViewController.m */,
 			);
 			path = LocationTester;
 			sourceTree = "<group>";
@@ -183,8 +192,9 @@
 			files = (
 				4EE503EB14F1F49E00C5F307 /* main.m in Sources */,
 				4EE503EF14F1F49E00C5F307 /* AppDelegate.m in Sources */,
-				4EE503F514F1F49E00C5F307 /* FirstViewController.m in Sources */,
 				4EE503FC14F1F49E00C5F307 /* SecondViewController.m in Sources */,
+				4EE5040814F1F65200C5F307 /* ControlViewController.m in Sources */,
+				4EE5040B14F1FCB400C5F307 /* RegionOptionsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,7 +270,9 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LocationTester/LocationTester-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "LocationTester/LocationTester-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -271,7 +283,9 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LocationTester/LocationTester-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "LocationTester/LocationTester-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -296,6 +310,7 @@
 				4EE5040514F1F49E00C5F307 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

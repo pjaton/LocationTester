@@ -11,4 +11,23 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
+    #ifdef DEBUG
+        #define DNSInfo(fmt, ...) NSLog(fmt, ##__VA_ARGS__);
+        #define DNSDebug(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+        #define DNSTrace(fmt, ...) fprintf( stderr, "%s\n", [[NSString stringWithFormat:(@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__] UTF8String] );
+        #define DNSNotify(fmt, ...) UILocalNotification *localNotif__LINE__ = [[UILocalNotification alloc] init];\
+        if (localNotif__LINE__) {\
+            localNotif__LINE__.alertBody = [NSString stringWithFormat:(fmt), ##__VA_ARGS__];\
+            localNotif__LINE__.soundName = UILocalNotificationDefaultSoundName;\
+            [[UIApplication sharedApplication] presentLocalNotificationNow:localNotif__LINE__];\
+        }
+
+    #else
+        #define DNSInfo(fmt, ...)
+        #define DNSDebug(fmt, ...)
+        #define DNSTrace(fmt, ...)
+        #define DNSNotify(fmt, ...)
+    #endif
+
 #endif
