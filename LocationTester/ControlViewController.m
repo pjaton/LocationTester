@@ -10,18 +10,20 @@
 
 @implementation ControlViewController {
     CLLocationManager * locationManager;  
-    Option * regionRadius;
-    Option * regionAccuracy;
-
+    OptionGroup * locationDistanceOptions;
+    OptionGroup * locationAccuracyOptions;
+    OptionGroup * regionRadiusOptions;
+    OptionGroup * regionAccuracyOptions;
 }
 
-@synthesize locationSwitch;
-@synthesize locationLabel;
-@synthesize regionSwitch;
-@synthesize regionLabel;
-@synthesize regionOptionsLabel;
-@synthesize significantChangeSwitch;
-@synthesize significantChangelabel;
+@synthesize locationSwitch = _locationSwitch;
+@synthesize locationOptionsLabel = _locationOptionsLabel;
+@synthesize locationLabel = _locationLabel;
+@synthesize regionSwitch = _regionSwitch;
+@synthesize regionLabel = _regionLabel;
+@synthesize regionOptionsLabel = _regionOptionsLabel;
+@synthesize significantChangeSwitch = _significantChangeSwitch;
+@synthesize significantChangelabel = _significantChangelabel;
 
 #pragma mark - View lifecycle
 
@@ -32,13 +34,55 @@
     }
     locationManager.delegate = self;
     
-    if (regionRadius == nil) {
-        regionRadius = [Option optionWithLabel:@"25 meters" andValue:25];
+    if (locationDistanceOptions == nil) {
+        locationDistanceOptions = [OptionGroup optionGroupWithOption:
+                                   [[NSArray alloc] initWithObjects:
+                                    [Option optionWithLabel:@"None" andValue:kCLDistanceFilterNone],
+                                    [Option optionWithLabel:@"5 meters" andValue:5],
+                                    [Option optionWithLabel:@"10 meters" andValue:10],
+                                    [Option optionWithLabel:@"15 meters" andValue:15],
+                                    [Option optionWithLabel:@"20 meters" andValue:20],
+                                    [Option optionWithLabel:@"25 meters" andValue:25],
+                                    [Option optionWithLabel:@"50 meters" andValue:50],
+                                    [Option optionWithLabel:@"100 meters" andValue:100],
+                                    [Option optionWithLabel:@"250 meters" andValue:250],
+                                    [Option optionWithLabel:@"500 meters" andValue:500],
+                                    [Option optionWithLabel:@"1km" andValue:1000],
+                                    [Option optionWithLabel:@"5km" andValue:5000],
+                                    nil] andSelected:1];
     }
-    if (regionAccuracy == nil) {
-        regionAccuracy = [Option optionWithLabel:@"~10 meters" andValue:kCLLocationAccuracyNearestTenMeters];
+    if (locationAccuracyOptions == nil) {
+        locationAccuracyOptions = [OptionGroup optionGroupWithOption:
+                                   [[NSArray alloc] initWithObjects:
+                                    [Option optionWithLabel:@"Navigation" andValue:kCLLocationAccuracyBestForNavigation],
+                                    [Option optionWithLabel:@"Best" andValue:kCLLocationAccuracyBest],
+                                    [Option optionWithLabel:@"~10 meters" andValue:kCLLocationAccuracyNearestTenMeters],
+                                    [Option optionWithLabel:@"~100 meters" andValue:kCLLocationAccuracyHundredMeters],
+                                    [Option optionWithLabel:@"~1km" andValue:kCLLocationAccuracyKilometer],
+                                    [Option optionWithLabel:@"~3km" andValue:kCLLocationAccuracyThreeKilometers],
+                                    nil] andSelected:1];
     }
-    [self refreshRegionOptionsLabel];
+    if (regionRadiusOptions == nil) {
+        regionRadiusOptions = [OptionGroup optionGroupWithOption:
+                               [[NSArray alloc] initWithObjects:
+                                [Option optionWithLabel:@"10 meters" andValue:10],
+                                [Option optionWithLabel:@"15 meters" andValue:15],
+                                [Option optionWithLabel:@"20 meters" andValue:20],
+                                [Option optionWithLabel:@"25 meters" andValue:25],
+                                [Option optionWithLabel:@"50 meters" andValue:50],
+                                [Option optionWithLabel:@"100 meters" andValue:100],
+                                [Option optionWithLabel:@"250 meters" andValue:250],
+                                [Option optionWithLabel:@"500 meters" andValue:500],
+                                [Option optionWithLabel:@"1km" andValue:1000],
+                                [Option optionWithLabel:@"5km" andValue:5000],
+                                nil] andSelected:2];
+    }
+    if (regionAccuracyOptions == nil) {
+        regionAccuracyOptions = [OptionGroup optionGroupWithOption:locationAccuracyOptions.options andSelected:1];
+    }
+    [self applyRegionOptions];
+    [self applyLocationOptions];
+    
     
     [super viewDidLoad];
 }
@@ -47,8 +91,10 @@
 {
     [super viewDidUnload];
     locationManager = nil;
-    regionRadius = nil;
-    regionAccuracy = nil;
+    locationDistanceOptions = nil;
+    locationAccuracyOptions = nil;
+    regionRadiusOptions = nil;
+    regionAccuracyOptions = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -58,13 +104,19 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	if ([segue.identifier isEqualToString:@"RegionOptions"])
-	{
-		RegionOptionsViewController *regionOptionsViewController = segue.destinationViewController;
-		regionOptionsViewController.delegate = self;
-        regionOptionsViewController.radius = regionRadius;
-        regionOptionsViewController.accuracy = regionAccuracy;
-	}
+	if ([segue.identifier isEqualToString:@"LocationsOptions"]) {
+        OptionsViewController *ctrl = segue.destinationViewController;
+        ctrl.delegate = self;
+        ctrl.control = segue.identifier;
+        ctrl.firstOptions = locationDistanceOptions;
+        ctrl.secondOptions = locationAccuracyOptions;
+	} else if ([segue.identifier isEqualToString:@"RegionOptions"]) {
+        OptionsViewController *ctrl = segue.destinationViewController;
+        ctrl.delegate = self;
+        ctrl.control = segue.identifier;
+        ctrl.firstOptions = regionRadiusOptions;
+        ctrl.secondOptions = regionAccuracyOptions;
+    }
 }
 
 
@@ -99,6 +151,13 @@
         self.locationSwitch.hidden = YES;
         self.locationLabel.text = @"Monitoring currently disabled";
     }
+}
+
+- (void)applyLocationOptions
+{
+    self.locationOptionsLabel.text = [NSString stringWithFormat:@"Filter %@ (%@)", 
+                                      [[locationDistanceOptions selectedOption] label], 
+                                      [[locationAccuracyOptions selectedOption] label]];
 }
 
 
@@ -138,9 +197,11 @@
     }
 }
 
-- (void)refreshRegionOptionsLabel
+- (void)applyRegionOptions
 {
-    self.regionOptionsLabel.text = [NSString stringWithFormat:@"Radius of %@ (%@)", regionRadius.label, regionAccuracy.label];
+    self.regionOptionsLabel.text = [NSString stringWithFormat:@"Radius of %@ (%@)", 
+                                    [[regionRadiusOptions selectedOption] label], 
+                                    [[regionAccuracyOptions selectedOption] label]];
 }
 
 
@@ -207,16 +268,13 @@
 
 #pragma mark - Region Options controller delegate
 
-- (void)cancelRegionOptions:(RegionOptionsViewController *)controller
+- (void)applyOptions:(OptionsViewController *)controller
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)defineRegionOptions:(RegionOptionsViewController *)controller radius:(Option *)radius accuracy:(Option *)accuracy
-{
-    regionRadius = radius;
-    regionAccuracy = accuracy;
-    [self refreshRegionOptionsLabel];
+	if ([controller.control isEqualToString:@"LocationsOptions"]) {
+        [self applyLocationOptions];
+	} else if ([controller.control isEqualToString:@"RegionOptions"]) {
+        [self applyRegionOptions];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

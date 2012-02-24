@@ -23,7 +23,8 @@
     return self;
 }
 
-+ (Option *)optionWithLabel:(NSString *)label andValue:(double)value {
++ (Option *)optionWithLabel:(NSString *)label andValue:(double)value 
+{
     return [[Option alloc] initWithLabel:label andValue:value];
 }
 

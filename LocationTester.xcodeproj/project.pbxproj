@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4E02135014F4B27E006304E6 /* Option.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E02134F14F4B27E006304E6 /* Option.m */; };
+		4E05D4C214F72D76004065B3 /* OptionGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E05D4C114F72D76004065B3 /* OptionGroup.m */; };
 		4E55379914F345E500DCDEFE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E55379614F3439A00DCDEFE /* CoreLocation.framework */; };
 		4EE503DF14F1F49E00C5F307 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503DE14F1F49E00C5F307 /* UIKit.framework */; };
 		4EE503E114F1F49E00C5F307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503E014F1F49E00C5F307 /* Foundation.framework */; };
@@ -22,12 +23,14 @@
 		4EE503FE14F1F49E00C5F307 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE503FD14F1F49E00C5F307 /* second.png */; };
 		4EE5040014F1F49E00C5F307 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE503FF14F1F49E00C5F307 /* second@2x.png */; };
 		4EE5040814F1F65200C5F307 /* ControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5040714F1F65200C5F307 /* ControlViewController.m */; };
-		4EE5040B14F1FCB400C5F307 /* RegionOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5040A14F1FCB400C5F307 /* RegionOptionsViewController.m */; };
+		4EE5040B14F1FCB400C5F307 /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE5040A14F1FCB400C5F307 /* OptionsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4E02134E14F4B27E006304E6 /* Option.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Option.h; sourceTree = "<group>"; };
 		4E02134F14F4B27E006304E6 /* Option.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Option.m; sourceTree = "<group>"; };
+		4E05D4C014F72D76004065B3 /* OptionGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionGroup.h; sourceTree = "<group>"; };
+		4E05D4C114F72D76004065B3 /* OptionGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionGroup.m; sourceTree = "<group>"; };
 		4E55379614F3439A00DCDEFE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4EE503DA14F1F49E00C5F307 /* LocationTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE503DE14F1F49E00C5F307 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -48,8 +51,8 @@
 		4EE503FF14F1F49E00C5F307 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		4EE5040614F1F65200C5F307 /* ControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlViewController.h; sourceTree = "<group>"; };
 		4EE5040714F1F65200C5F307 /* ControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlViewController.m; sourceTree = "<group>"; };
-		4EE5040914F1FCB400C5F307 /* RegionOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionOptionsViewController.h; sourceTree = "<group>"; };
-		4EE5040A14F1FCB400C5F307 /* RegionOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionOptionsViewController.m; sourceTree = "<group>"; };
+		4EE5040914F1FCB400C5F307 /* OptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsViewController.h; sourceTree = "<group>"; };
+		4EE5040A14F1FCB400C5F307 /* OptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,10 +113,12 @@
 				4EE503FD14F1F49E00C5F307 /* second.png */,
 				4EE503FF14F1F49E00C5F307 /* second@2x.png */,
 				4EE503E514F1F49E00C5F307 /* Supporting Files */,
-				4EE5040914F1FCB400C5F307 /* RegionOptionsViewController.h */,
-				4EE5040A14F1FCB400C5F307 /* RegionOptionsViewController.m */,
+				4EE5040914F1FCB400C5F307 /* OptionsViewController.h */,
+				4EE5040A14F1FCB400C5F307 /* OptionsViewController.m */,
 				4E02134E14F4B27E006304E6 /* Option.h */,
 				4E02134F14F4B27E006304E6 /* Option.m */,
+				4E05D4C014F72D76004065B3 /* OptionGroup.h */,
+				4E05D4C114F72D76004065B3 /* OptionGroup.m */,
 			);
 			path = LocationTester;
 			sourceTree = "<group>";
@@ -199,8 +204,9 @@
 				4EE503EF14F1F49E00C5F307 /* AppDelegate.m in Sources */,
 				4EE503FC14F1F49E00C5F307 /* SecondViewController.m in Sources */,
 				4EE5040814F1F65200C5F307 /* ControlViewController.m in Sources */,
-				4EE5040B14F1FCB400C5F307 /* RegionOptionsViewController.m in Sources */,
+				4EE5040B14F1FCB400C5F307 /* OptionsViewController.m in Sources */,
 				4E02135014F4B27E006304E6 /* Option.m in Sources */,
+				4E05D4C214F72D76004065B3 /* OptionGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
