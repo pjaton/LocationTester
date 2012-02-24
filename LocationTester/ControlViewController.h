@@ -8,18 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "RegionOptionsViewController.h"
 
-@interface ControlViewController : UITableViewController<CLLocationManagerDelegate, UIAlertViewDelegate>
+@interface ControlViewController : UITableViewController<CLLocationManagerDelegate, UIAlertViewDelegate, RegionOptionsViewControllerDelegate>
 
-@property (nonatomic, weak) IBOutlet UILabel  *locationLabel;
-@property (nonatomic, weak) IBOutlet UISwitch *locationSwitch;
-@property (nonatomic, weak) IBOutlet UILabel  *regionLabel;
-@property (nonatomic, weak) IBOutlet UISwitch *regionSwitch;
-@property (nonatomic, weak) IBOutlet UILabel  *significantChangelabel;
-@property (nonatomic, weak) IBOutlet UISwitch *significantChangeSwitch;
+@property (nonatomic, strong) IBOutlet UISwitch *locationSwitch;
+@property (nonatomic, strong) IBOutlet UILabel  *locationLabel;
+@property (nonatomic, strong) IBOutlet UISwitch *regionSwitch;
+@property (nonatomic, strong) IBOutlet UILabel  *regionLabel;
+@property (nonatomic, strong) IBOutlet UILabel  *regionOptionsLabel;
+@property (nonatomic, strong) IBOutlet UISwitch *significantChangeSwitch;
+@property (nonatomic, strong) IBOutlet UILabel  *significantChangelabel;
 
-- (IBAction)locationChanged;
-- (IBAction)significantChangeChanged;
-- (IBAction)regionChanged;
+- (IBAction)locationSwitched;
+- (IBAction)significantChangeSwitched;
+- (IBAction)regionSwitched;
+
+- (void)refreshRegionOptionsLabel;
 
 @end

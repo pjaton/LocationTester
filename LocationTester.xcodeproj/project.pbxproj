@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E02135014F4B27E006304E6 /* Option.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E02134F14F4B27E006304E6 /* Option.m */; };
 		4E55379914F345E500DCDEFE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E55379614F3439A00DCDEFE /* CoreLocation.framework */; };
 		4EE503DF14F1F49E00C5F307 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503DE14F1F49E00C5F307 /* UIKit.framework */; };
 		4EE503E114F1F49E00C5F307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503E014F1F49E00C5F307 /* Foundation.framework */; };
@@ -25,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E02134E14F4B27E006304E6 /* Option.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Option.h; sourceTree = "<group>"; };
+		4E02134F14F4B27E006304E6 /* Option.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Option.m; sourceTree = "<group>"; };
 		4E55379614F3439A00DCDEFE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4EE503DA14F1F49E00C5F307 /* LocationTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE503DE14F1F49E00C5F307 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -109,6 +112,8 @@
 				4EE503E514F1F49E00C5F307 /* Supporting Files */,
 				4EE5040914F1FCB400C5F307 /* RegionOptionsViewController.h */,
 				4EE5040A14F1FCB400C5F307 /* RegionOptionsViewController.m */,
+				4E02134E14F4B27E006304E6 /* Option.h */,
+				4E02134F14F4B27E006304E6 /* Option.m */,
 			);
 			path = LocationTester;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 				4EE503FC14F1F49E00C5F307 /* SecondViewController.m in Sources */,
 				4EE5040814F1F65200C5F307 /* ControlViewController.m in Sources */,
 				4EE5040B14F1FCB400C5F307 /* RegionOptionsViewController.m in Sources */,
+				4E02135014F4B27E006304E6 /* Option.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

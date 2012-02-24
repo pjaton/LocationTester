@@ -38,7 +38,7 @@
                                                         <integer key="isElement" value="0"/>
                                                     </accessibility>
                                                     <connections>
-                                                        <action selector="locationChanged:" destination="xbA-LI-DYj" eventType="valueChanged" id="cjM-0l-qsZ"/>
+                                                        <action selector="locationSwitched" destination="xbA-LI-DYj" eventType="valueChanged" id="gVM-uc-N6U"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -72,7 +72,7 @@
                                                         <integer key="isElement" value="0"/>
                                                     </accessibility>
                                                     <connections>
-                                                        <action selector="significantChangeChanged:" destination="xbA-LI-DYj" eventType="valueChanged" id="HBW-Ls-vFK"/>
+                                                        <action selector="significantChangeSwitched" destination="xbA-LI-DYj" eventType="valueChanged" id="oo1-L1-FQt"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -102,7 +102,7 @@
                                                     <rect key="frame" x="201" y="8" width="79" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
-                                                        <action selector="regionChanged:" destination="xbA-LI-DYj" eventType="valueChanged" id="9oe-qr-BZw"/>
+                                                        <action selector="regionSwitched" destination="xbA-LI-DYj" eventType="valueChanged" id="YU7-4a-1Lq"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -117,25 +117,19 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Radius (meters)" lineBreakMode="tailTruncation" minimumFontSize="10" id="D5J-Ve-7eo">
-                                                    <rect key="frame" x="20" y="11" width="121" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Radius &amp; Accuracy" lineBreakMode="tailTruncation" minimumFontSize="10" id="D5J-Ve-7eo">
+                                                    <rect key="frame" x="20" y="11" width="260" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" id="SZR-Dg-aCe">
-                                                    <rect key="frame" x="200" y="6" width="80" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="g0a-It-0RX" kind="modal" id="ZHP-xI-v24"/>
+                                            <segue destination="g0a-It-0RX" kind="modal" identifier="RegionOptions" id="ZHP-xI-v24"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -151,13 +145,14 @@
                         <outlet property="locationLabel" destination="q0F-Bt-XlW" id="pUt-pD-CqT"/>
                         <outlet property="locationSwitch" destination="wcA-fR-z1D" id="pn2-jt-Aay"/>
                         <outlet property="regionLabel" destination="ofA-93-C8W" id="3oO-pM-hMY"/>
+                        <outlet property="regionOptionsLabel" destination="D5J-Ve-7eo" id="Tsz-Ue-ES2"/>
                         <outlet property="regionSwitch" destination="Oxt-Ri-Tpy" id="W52-Q1-OC6"/>
                         <outlet property="significantChangeSwitch" destination="ybV-tP-4eA" id="bI5-tA-Qbm"/>
                         <outlet property="significantChangelabel" destination="g9V-vY-i14" id="6Ob-cK-y4a"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-1243" y="-14"/>
+            <point key="canvasLocation" x="-1243" y="-6"/>
         </scene>
         <scene sceneID="coj-YP-nSQ">
             <objects>
@@ -175,12 +170,42 @@
                                     <outlet property="delegate" destination="g0a-It-0RX" id="FJY-hF-KlJ"/>
                                 </connections>
                             </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="abh-9Q-Klz">
+                                <rect key="frame" x="56" y="303" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Ok">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="applyChanges" destination="g0a-It-0RX" eventType="touchUpInside" id="teB-7j-SNz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ExN-ng-Nl8">
+                                <rect key="frame" x="193" y="303" width="74" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelChanges" destination="g0a-It-0RX" eventType="touchUpInside" id="Atg-gW-SDO"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Region Radius" id="VsF-Uu-4ow"/>
                     <connections>
-                        <outlet property="picker" destination="c5q-DB-Zyw" id="0T8-mT-V9T"/>
+                        <outlet property="picker" destination="c5q-DB-Zyw" id="8GJ-Px-Tmz"/>
                     </connections>
                 </viewController>
             </objects>
@@ -239,31 +264,6 @@
         <image name="First" width="16" height="16"/>
         <image name="second" width="16" height="16"/>
     </resources>
-    <classes>
-        <class className="ControlViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ControlViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="locationChanged"/>
-                <relationship kind="action" name="regionChanged"/>
-                <relationship kind="action" name="significantChangeChanged"/>
-                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="locationSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="regionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="regionSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="significantChangeSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="significantChangelabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RegionOptionsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RegionOptionsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="picker" candidateClass="UIPickerView"/>
-            </relationships>
-        </class>
-        <class className="SecondViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SecondViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

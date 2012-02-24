@@ -24,10 +24,10 @@
         }
 
     #else
-        #define DNSInfo(fmt, ...)
-        #define DNSDebug(fmt, ...)
-        #define DNSTrace(fmt, ...)
-        #define DNSNotify(fmt, ...)
+        #define DNSInfo(fmt, ...);
+        #define DNSDebug(fmt, ...);
+        #define DNSTrace(fmt, ...);
+        #define DNSNotify(fmt, ...);
     #endif
 
 #endif

@@ -14,7 +14,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+
+    if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey]) {
+        DNSInfo(@"started from location");
+    }
+
+    
     return YES;
 }
 							

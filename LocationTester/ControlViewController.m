@@ -9,27 +9,19 @@
 #import "ControlViewController.h"
 
 @implementation ControlViewController {
-    CLLocationManager * locationManager;    
+    CLLocationManager * locationManager;  
+    Option * regionRadius;
+    Option * regionAccuracy;
+
 }
 
-@synthesize locationLabel, locationSwitch, regionLabel, regionSwitch, significantChangelabel, significantChangeSwitch;
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
+@synthesize locationSwitch;
+@synthesize locationLabel;
+@synthesize regionSwitch;
+@synthesize regionLabel;
+@synthesize regionOptionsLabel;
+@synthesize significantChangeSwitch;
+@synthesize significantChangelabel;
 
 #pragma mark - View lifecycle
 
@@ -40,59 +32,39 @@
     }
     locationManager.delegate = self;
     
-    
-    if ([CLLocationManager locationServicesEnabled]) {
-        
-    } else {
-        self.locationSwitch.hidden = true;
-        self.significantChangeSwitch.hidden = true;
-        self.regionSwitch.hidden = true;
-        
+    if (regionRadius == nil) {
+        regionRadius = [Option optionWithLabel:@"25 meters" andValue:25];
     }
-    
+    if (regionAccuracy == nil) {
+        regionAccuracy = [Option optionWithLabel:@"~10 meters" andValue:kCLLocationAccuracyNearestTenMeters];
+    }
+    [self refreshRegionOptionsLabel];
     
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
 {
-    locationManager = nil;
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    DNSInfo(@"view did appear");
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
+    locationManager = nil;
+    regionRadius = nil;
+    regionAccuracy = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	if ([segue.identifier isEqualToString:@"RegionOptions"])
+	{
+		RegionOptionsViewController *regionOptionsViewController = segue.destinationViewController;
+		regionOptionsViewController.delegate = self;
+        regionOptionsViewController.radius = regionRadius;
+        regionOptionsViewController.accuracy = regionAccuracy;
+	}
 }
 
 
@@ -111,13 +83,15 @@
 
 
 
-#pragma mark - Location
+#pragma mark - Location controls
 
-- (IBAction)locationChanged {
+- (IBAction)locationSwitched
+{
     DNSInfo(@"%d", self.locationSwitch.isOn);
 }
 
-- (void)locationControls:(BOOL)enabled {
+- (void)locationControls:(BOOL)enabled
+{
     if (enabled) {
         self.locationSwitch.hidden = NO;
         self.locationLabel.text = @"Monitoring";
@@ -128,13 +102,15 @@
 }
 
 
-#pragma mark - Significant change
+#pragma mark - Significant change controls
 
-- (IBAction)significantChangeChanged {
+- (IBAction)significantChangeSwitched
+{
 }
 
 
-- (void)significantChangeControls:(BOOL)enabled {
+- (void)significantChangeControls:(BOOL)enabled
+{
     if (enabled) {
         self.significantChangeSwitch.hidden = NO;
         self.significantChangelabel.text = @"Monitoring";
@@ -145,12 +121,14 @@
 }
 
 
-#pragma mark - Significant change
+#pragma mark - Region controls
 
-- (IBAction)regionChanged {
+- (IBAction)regionSwitched
+{
 }
 
-- (void)regionControls:(BOOL)enabled {
+- (void)regionControls:(BOOL)enabled
+{
     if (enabled) {
         self.regionSwitch.hidden = NO;
         self.regionLabel.text = @"Monitoring";
@@ -160,11 +138,26 @@
     }
 }
 
+- (void)refreshRegionOptionsLabel
+{
+    self.regionOptionsLabel.text = [NSString stringWithFormat:@"Radius of %@ (%@)", regionRadius.label, regionAccuracy.label];
+}
 
 
-#pragma mark - Location Manager Delegate
 
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+#pragma mark - Location Manager delegate
+
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    
+    DNSInfo(@"%@", [newLocation description]);
+}
+
+
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
 
     // the user has explicitly denied authorization for this application, 
     // or location services are disabled in Settings
@@ -173,7 +166,7 @@
         [self significantChangeControls:NO];
         [self regionControls:NO];
 
-        UIAlertView *debugAlert = [[UIAlertView alloc] initWithTitle:@"Services Disabled" message:@"This app. requires the location services to work properly. You can enable them in the system preferences." delegate:self cancelButtonTitle:@"Close" otherButtonTitles:@"Preferences", nil];
+        UIAlertView *debugAlert = [[UIAlertView alloc] initWithTitle:@"This App. Requires the Location Services to Determine Your Location" message:nil delegate:self cancelButtonTitle:@"Settings" otherButtonTitles:@"Cancel", nil];
         [debugAlert show];
     }
     
@@ -195,18 +188,36 @@
     else {
         [self locationControls:YES];
         [self significantChangeControls:[CLLocationManager significantLocationChangeMonitoringAvailable]];
-        [self regionControls:[CLLocationManager regionMonitoringAvailable] && [CLLocationManager regionMonitoringEnabled]];
+        [self regionControls:[CLLocationManager regionMonitoringAvailable] && [CLLocationManager regionMonitoringEnabled] && (locationManager.maximumRegionMonitoringDistance > 0)];
     }
 }
 
 
 
-#pragma mark - Alert View Delegate
+#pragma mark - Alert View delegate
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Preferences"]) {
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Settings"]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs://"]];
     }
+}
+
+
+
+#pragma mark - Region Options controller delegate
+
+- (void)cancelRegionOptions:(RegionOptionsViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)defineRegionOptions:(RegionOptionsViewController *)controller radius:(Option *)radius accuracy:(Option *)accuracy
+{
+    regionRadius = radius;
+    regionAccuracy = accuracy;
+    [self refreshRegionOptionsLabel];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

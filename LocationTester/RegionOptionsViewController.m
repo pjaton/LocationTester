@@ -7,56 +7,62 @@
 //
 
 #import "RegionOptionsViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
-@implementation RegionOptionsViewController
-
-@synthesize distances = _distances;
-@synthesize precisions = _precisions;
-
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+@implementation RegionOptionsViewController {
+    NSArray *radiuses;
+    NSArray *accuracies;
 }
 
-- (void)didReceiveMemoryWarning
+@synthesize picker = _picker;
+@synthesize delegate = _delegate;
+@synthesize radius = _radius;
+@synthesize accuracy = _accuracy;
+
+
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
+	if ((self = [super initWithCoder:aDecoder]))
+	{
+        radiuses = [[NSArray alloc] initWithObjects:
+                    [Option optionWithLabel:@"10 meters" andValue:10],
+                    [Option optionWithLabel:@"15 meters" andValue:15],
+                    [Option optionWithLabel:@"20 meters" andValue:20],
+                    [Option optionWithLabel:@"25 meters" andValue:25],
+                    [Option optionWithLabel:@"50 meters" andValue:50],
+                    [Option optionWithLabel:@"100 meters" andValue:100],
+                    [Option optionWithLabel:@"250 meters" andValue:250],
+                    [Option optionWithLabel:@"500 meters" andValue:500],
+                    [Option optionWithLabel:@"1km" andValue:1000],
+                    [Option optionWithLabel:@"5km" andValue:5000],
+                    nil];
+        accuracies = [[NSArray alloc] initWithObjects:
+                      [Option optionWithLabel:@"Navigation" andValue:kCLLocationAccuracyBestForNavigation],
+                      [Option optionWithLabel:@"Best" andValue:kCLLocationAccuracyBest],
+                      [Option optionWithLabel:@"~10 meters" andValue:kCLLocationAccuracyNearestTenMeters],
+                      [Option optionWithLabel:@"~100 meters" andValue:kCLLocationAccuracyHundredMeters],
+                      [Option optionWithLabel:@"~1km" andValue:kCLLocationAccuracyKilometer],
+                      [Option optionWithLabel:@"~3km" andValue:kCLLocationAccuracyThreeKilometers],
+                      nil];
+	}
+	return self;
 }
+
 
 #pragma mark - View lifecycle
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
-
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    self.distances = [[NSArray alloc] initWithObjects:@"10 meters",@"15 meters",@"20 meters",@"25 meters",@"50 meters",@"100 meters",@"250 meters",@"500 meters",@"1km",nil];
-    self.precisions = [[NSArray alloc] initWithObjects:@"Best for Nav.",@"Best",@"~10 meters",@"~100 meters",nil];
-    [picker selectRow:3 inComponent:0 animated:NO];
-    [picker selectRow:1 inComponent:1 animated:NO];
+    [self.picker selectRow:[radiuses indexOfObject:self.radius] inComponent:0 animated:NO];
+    [self.picker selectRow:[accuracies indexOfObject:self.accuracy] inComponent:1 animated:NO];
     [super viewDidLoad];
 }
-
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    radiuses = nil;
+    accuracies = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -75,9 +81,9 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     if (component == 0) {
-        return [self.distances count];
+        return [radiuses count];
     }
-    return [self.precisions count];
+    return [accuracies count];
 }
 
 
@@ -86,11 +92,24 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (component == 0) {
-        return [self.distances objectAtIndex:row];
+        return [[radiuses objectAtIndex:row] label];
     }
-    return [self.precisions objectAtIndex:row];
+    return [[accuracies objectAtIndex:row] label];
 }
 
 
 
+#pragma mark - Picker View Delegate
+
+- (IBAction)applyChanges 
+{
+    self.radius = [radiuses objectAtIndex: [self.picker selectedRowInComponent:0]];
+    self.accuracy = [accuracies objectAtIndex: [self.picker selectedRowInComponent:1]];
+    [self.delegate defineRegionOptions:self radius:self.radius accuracy:self.accuracy];
+}
+
+- (IBAction)cancelChanges 
+{
+    [self.delegate cancelRegionOptions:self];
+}
 @end
