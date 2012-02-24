@@ -13,7 +13,7 @@
 
 @protocol OptionsViewControllerDelegate <NSObject>
 
-- (void)applyOptions:(OptionsViewController *)controller;
+- (void)updateOption:(OptionsViewController *)controller withChanges:(BOOL)changed;
 
 @end
 

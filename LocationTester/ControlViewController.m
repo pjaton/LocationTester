@@ -120,21 +120,6 @@
 }
 
 
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-}
-
-
-
 #pragma mark - Location controls
 
 - (IBAction)locationSwitched
@@ -268,12 +253,14 @@
 
 #pragma mark - Region Options controller delegate
 
-- (void)applyOptions:(OptionsViewController *)controller
+- (void)updateOption:(OptionsViewController *)controller withChanges:(BOOL)changed;
 {
-	if ([controller.control isEqualToString:@"LocationsOptions"]) {
-        [self applyLocationOptions];
-	} else if ([controller.control isEqualToString:@"RegionOptions"]) {
-        [self applyRegionOptions];
+    if (changed) {
+        if ([controller.control isEqualToString:@"LocationsOptions"]) {
+            [self applyLocationOptions];
+        } else if ([controller.control isEqualToString:@"RegionOptions"]) {
+            [self applyRegionOptions];
+        }
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }

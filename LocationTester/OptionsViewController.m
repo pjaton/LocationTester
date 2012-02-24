@@ -63,9 +63,12 @@
 
 - (IBAction)apply 
 {
-    self.firstOptions.selected = [self.picker selectedRowInComponent:0];
-    self.secondOptions.selected = [self.picker selectedRowInComponent:1];
-    [self.delegate applyOptions:self];
+    NSInteger firstIndex = [self.picker selectedRowInComponent:0];
+    NSInteger secondIndex = [self.picker selectedRowInComponent:1];
+    BOOL changed = (firstIndex != self.firstOptions.selected) || (secondIndex != self.secondOptions.selected);
+    self.firstOptions.selected = firstIndex;
+    self.secondOptions.selected = secondIndex;
+    [self.delegate updateOption:self withChanges:changed];
 }
 
 @end
