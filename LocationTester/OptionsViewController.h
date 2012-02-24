@@ -20,7 +20,9 @@
 @interface OptionsViewController : UIViewController<UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UIPickerView *picker;
+@property (nonatomic, strong) IBOutlet UILabel *label;
 @property (nonatomic, strong) NSString *control;
+@property (nonatomic, strong) NSString *message;
 @property (nonatomic, strong) OptionGroup *firstOptions;
 @property (nonatomic, strong) OptionGroup *secondOptions;
 

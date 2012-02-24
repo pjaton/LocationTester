@@ -12,8 +12,10 @@
 @implementation OptionsViewController
 
 @synthesize picker = _picker;
+@synthesize label = _label;
 @synthesize delegate = _delegate;
 @synthesize control = _control;
+@synthesize message = _message;
 @synthesize firstOptions = _firstOptions;
 @synthesize secondOptions = _secondOptions;
 
@@ -24,6 +26,7 @@
 {
     [self.picker selectRow:self.firstOptions.selected inComponent:0 animated:NO];
     [self.picker selectRow:self.secondOptions.selected inComponent:1 animated:NO];
+    self.label.text = self.message;
     [super viewDidLoad];
 }
 
@@ -71,4 +74,8 @@
     [self.delegate updateOption:self withChanges:changed];
 }
 
+- (void)viewDidUnload {
+    [self setLabel:nil];
+    [super viewDidUnload];
+}
 @end

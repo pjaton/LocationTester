@@ -108,12 +108,14 @@
         OptionsViewController *ctrl = segue.destinationViewController;
         ctrl.delegate = self;
         ctrl.control = segue.identifier;
+        ctrl.message = @"Define the location filter & accuracy";
         ctrl.firstOptions = locationDistanceOptions;
         ctrl.secondOptions = locationAccuracyOptions;
 	} else if ([segue.identifier isEqualToString:@"RegionOptions"]) {
         OptionsViewController *ctrl = segue.destinationViewController;
         ctrl.delegate = self;
         ctrl.control = segue.identifier;
+        ctrl.message = @"Define the region radius & accuracy";
         ctrl.firstOptions = regionRadiusOptions;
         ctrl.secondOptions = regionAccuracyOptions;
     }
