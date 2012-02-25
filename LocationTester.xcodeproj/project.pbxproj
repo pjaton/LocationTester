@@ -10,6 +10,7 @@
 		4E02135014F4B27E006304E6 /* Option.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E02134F14F4B27E006304E6 /* Option.m */; };
 		4E05D4C214F72D76004065B3 /* OptionGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E05D4C114F72D76004065B3 /* OptionGroup.m */; };
 		4E55379914F345E500DCDEFE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E55379614F3439A00DCDEFE /* CoreLocation.framework */; };
+		4E87A73714F9A5FB003C3809 /* Tracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E87A73614F9A5FB003C3809 /* Tracker.m */; };
 		4EB5BC1614F94C5800232A33 /* LocationTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB5BC1514F94C5800232A33 /* LocationTracker.m */; };
 		4EE503DF14F1F49E00C5F307 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503DE14F1F49E00C5F307 /* UIKit.framework */; };
 		4EE503E114F1F49E00C5F307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503E014F1F49E00C5F307 /* Foundation.framework */; };
@@ -33,7 +34,9 @@
 		4E05D4C014F72D76004065B3 /* OptionGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionGroup.h; sourceTree = "<group>"; };
 		4E05D4C114F72D76004065B3 /* OptionGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionGroup.m; sourceTree = "<group>"; };
 		4E55379614F3439A00DCDEFE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		4EB5BC1414F94C5800232A33 /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; path = LocationTracker.h; sourceTree = "<group>"; };
+		4E87A73514F9A5FB003C3809 /* Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = Tracker.h; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
+		4E87A73614F9A5FB003C3809 /* Tracker.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = Tracker.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
+		4EB5BC1414F94C5800232A33 /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTracker.h; sourceTree = "<group>"; };
 		4EB5BC1514F94C5800232A33 /* LocationTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTracker.m; sourceTree = "<group>"; };
 		4EE503DA14F1F49E00C5F307 /* LocationTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE503DE14F1F49E00C5F307 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -91,6 +94,8 @@
 		4EB5BC1314F94C3400232A33 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				4E87A73514F9A5FB003C3809 /* Tracker.h */,
+				4E87A73614F9A5FB003C3809 /* Tracker.m */,
 				4EB5BC1414F94C5800232A33 /* LocationTracker.h */,
 				4EB5BC1514F94C5800232A33 /* LocationTracker.m */,
 			);
@@ -229,6 +234,7 @@
 				4E02135014F4B27E006304E6 /* Option.m in Sources */,
 				4E05D4C214F72D76004065B3 /* OptionGroup.m in Sources */,
 				4EB5BC1614F94C5800232A33 /* LocationTracker.m in Sources */,
+				4E87A73714F9A5FB003C3809 /* Tracker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

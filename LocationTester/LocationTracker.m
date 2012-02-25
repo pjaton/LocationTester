@@ -9,28 +9,13 @@
 #import "LocationTracker.h"
 
 
-@implementation LocationTracker {
-    CLLocationManager * locationManager;  
-}
+@implementation LocationTracker
 
 @synthesize delegate = _delegate;
 
 
-
-- (id)init {
-    self = [super init];
-    if (self) {
-        if (nil == locationManager) {
-            locationManager = [[CLLocationManager alloc] init];
-        }
-        [locationManager setDelegate:self];
-    }
-    return self;
-}
-
-
 - (void)startMonitoringLocation:(CLLocationDistance)distance accuracy:(CLLocationAccuracy)accuracy {
-    DNSInfo(@"Start monitoring location (distance %.2fm, accuracy: %.2fm)", distance, accuracy);
+    DNSInfo(@"Start monitoring location (distance %.0fm, accuracy: %.0fm)", distance, accuracy);
     [locationManager setDistanceFilter:distance];
     [locationManager setDesiredAccuracy:accuracy];
     [locationManager startUpdatingLocation];

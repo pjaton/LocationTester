@@ -6,11 +6,6 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
-
-#define LOCATIONS_FILE @"Locations"
-#define LOCATIONS_FILE_TYPE @"log"
 
 @class LocationTracker;
 
@@ -22,7 +17,9 @@
 
 
 
-@interface LocationTracker : NSObject<CLLocationManagerDelegate>
+#import "Tracker.h"
+
+@interface LocationTracker : Tracker
 
 @property (nonatomic, weak) id <LocationTrackerDelegate> delegate;
 
