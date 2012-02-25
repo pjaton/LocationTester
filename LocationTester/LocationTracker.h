@@ -19,7 +19,7 @@
 
 #import "Tracker.h"
 
-@interface LocationTracker : Tracker
+@interface LocationTracker : Tracker<UIAlertViewDelegate>
 
 @property (nonatomic, weak) id <LocationTrackerDelegate> delegate;
 

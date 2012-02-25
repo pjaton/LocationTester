@@ -203,17 +203,6 @@
 }
 
 
-#pragma mark - Alert View delegate
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Settings"]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs://"]];
-    }
-}
-
-
-
 #pragma mark - Region Options controller delegate
 
 - (void)optionsController:(OptionsViewController *)controller updatedWithChanges:(BOOL)changed

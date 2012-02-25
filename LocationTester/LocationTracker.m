@@ -33,38 +33,6 @@
 #pragma mark - Location Manager Delegate
 
 
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
-{
-    BOOL authorized = YES;
-    
-    // the user has explicitly denied authorization for this application, 
-    // or location services are disabled in Settings
-    if (status == kCLAuthorizationStatusDenied) {
-        authorized = NO;
-        UIAlertView *debugAlert = [[UIAlertView alloc] initWithTitle:@"This App. Requires the Location Services to Determine Your Location" message:nil delegate:self cancelButtonTitle:@"Settings" otherButtonTitles:@"Cancel", nil];
-        [debugAlert show];
-    }
-    
-    // this application is not authorized to use location services due
-    // to active restrictions on location services, the user cannot change
-    // this status, and may not have personally denied authorization
-    else if (status == kCLAuthorizationStatusRestricted) {
-        authorized = NO;
-        UIAlertView *debugAlert = [[UIAlertView alloc] initWithTitle:@"Services Restricted" message:@"The location services are currently restricted on this device! Please try again later." delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
-        [debugAlert show];
-        
-    }
-    
-    // otherwise, the user has either not made a choice with regards to this 
-    // application or (s)he has authorized it to user the location services
-
-    if (nil != self.delegate) {
-        [self.delegate locationtracker:self authorizationChanged:authorized];
-    }
-
-}
-
-
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     
@@ -102,6 +70,47 @@
     // If a heading could not be determined because of strong interference from nearby magnetic fields, this method returns kCLErrorHeadingFailure.
     DNSInfo(@"LM did fail with error %@", [error localizedDescription]);
 
+}
+
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    BOOL authorized = YES;
+    
+    // the user has explicitly denied authorization for this application, 
+    // or location services are disabled in Settings
+    if (status == kCLAuthorizationStatusDenied) {
+        authorized = NO;
+        UIAlertView *debugAlert = [[UIAlertView alloc] initWithTitle:@"This App. Requires the Location Services to Determine Your Location" message:nil delegate:self cancelButtonTitle:@"Settings" otherButtonTitles:@"Cancel", nil];
+        [debugAlert show];
+    }
+    
+    // this application is not authorized to use location services due
+    // to active restrictions on location services, the user cannot change
+    // this status, and may not have personally denied authorization
+    else if (status == kCLAuthorizationStatusRestricted) {
+        authorized = NO;
+        UIAlertView *debugAlert = [[UIAlertView alloc] initWithTitle:@"Services Restricted" message:@"The location services are currently restricted on this device! Please try again later." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
+        [debugAlert show];
+        
+    }
+    
+    // otherwise, the user has either not made a choice with regards to this 
+    // application or (s)he has authorized it to user the location services
+    
+    if (nil != self.delegate) {
+        [self.delegate locationtracker:self authorizationChanged:authorized];
+    }
+    
+}
+
+#pragma mark - Alert View delegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Settings"]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs://"]];
+    }
 }
 
 @end
