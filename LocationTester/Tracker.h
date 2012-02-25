@@ -15,4 +15,7 @@
     CLLocationManager * locationManager;  
 }
 
+- (void) log:(NSString *)message;
+- (void) reportLocation:(CLLocation *)location withMessage:(NSString *)message;
+
 @end

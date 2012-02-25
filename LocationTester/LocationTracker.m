@@ -14,7 +14,8 @@
 @synthesize delegate = _delegate;
 
 
-- (void)startMonitoringLocation:(CLLocationDistance)distance accuracy:(CLLocationAccuracy)accuracy {
+- (void)startMonitoringLocation:(CLLocationDistance)distance accuracy:(CLLocationAccuracy)accuracy 
+{
     DNSInfo(@"Start monitoring location (distance %.0fm, accuracy: %.0fm)", distance, accuracy);
     [locationManager setDistanceFilter:distance];
     [locationManager setDesiredAccuracy:accuracy];
@@ -22,7 +23,8 @@
     
 }
 
-- (void)stopMonitoringLocation {
+- (void)stopMonitoringLocation 
+{
     DNSInfo(@"Stop monitoring location");
     [locationManager stopUpdatingLocation];
 }
@@ -35,42 +37,15 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    
     NSDate* eventDate = newLocation.timestamp;
     NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
     if (abs(howRecent) < 15.0) {
-        NSString* path = [[NSBundle mainBundle] pathForResource:LOCATIONS_FILE ofType:LOCATIONS_FILE_TYPE];
-        NSFileHandle *file = [NSFileHandle fileHandleForUpdatingAtPath:path];
-        NSString * msg = [NSString stringWithFormat:@"\n%@", [newLocation description]];
-        NSData *data = [msg dataUsingEncoding:NSUTF8StringEncoding];
-        [file seekToEndOfFile];
-        [file writeData: data];
-        [file closeFile];
-
-        
-        
-        
-        if ([newLocation horizontalAccuracy] <= 10) {
-            DNSNotify(@"Precision reached: %+.6f, %+.6f\n", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
-            
-        } else {
-            DNSInfo(@"Not precise:%@", [newLocation description]);
-        }
+        [self reportLocation:newLocation withMessage:@"Location Update"];
     } else {
-        DNSInfo(@"Tossed:%@", [newLocation description]);
+        DNSInfo(@"Ignore old location: %@", [newLocation description]);
     }
-
 }
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    // TODO: add support for the following:
-    // If the location service is unable to retrieve a location right away, it reports a kCLErrorLocationUnknown error and keeps trying. In such a situation, you can simply ignore the error and wait for a new event.
-    // If the user denies your application’s use of the location service, this method reports a kCLErrorDenied error. Upon receiving such an error, you should stop the location service.
-    // If a heading could not be determined because of strong interference from nearby magnetic fields, this method returns kCLErrorHeadingFailure.
-    DNSInfo(@"LM did fail with error %@", [error localizedDescription]);
-
-}
 
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
