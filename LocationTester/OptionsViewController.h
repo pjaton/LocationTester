@@ -13,7 +13,7 @@
 
 @protocol OptionsViewControllerDelegate <NSObject>
 
-- (void)updateOption:(OptionsViewController *)controller withChanges:(BOOL)changed;
+- (void)optionsController:(OptionsViewController *)controller updatedWithChanges:(BOOL)changed;
 
 @end
 
@@ -25,7 +25,6 @@
 @property (nonatomic, strong) NSString *message;
 @property (nonatomic, strong) OptionGroup *firstOptions;
 @property (nonatomic, strong) OptionGroup *secondOptions;
-
 @property (nonatomic, weak) id <OptionsViewControllerDelegate> delegate;
 
 - (IBAction)apply;

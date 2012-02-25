@@ -10,6 +10,7 @@
 		4E02135014F4B27E006304E6 /* Option.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E02134F14F4B27E006304E6 /* Option.m */; };
 		4E05D4C214F72D76004065B3 /* OptionGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E05D4C114F72D76004065B3 /* OptionGroup.m */; };
 		4E55379914F345E500DCDEFE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E55379614F3439A00DCDEFE /* CoreLocation.framework */; };
+		4EB5BC1614F94C5800232A33 /* LocationTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB5BC1514F94C5800232A33 /* LocationTracker.m */; };
 		4EE503DF14F1F49E00C5F307 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503DE14F1F49E00C5F307 /* UIKit.framework */; };
 		4EE503E114F1F49E00C5F307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503E014F1F49E00C5F307 /* Foundation.framework */; };
 		4EE503E314F1F49E00C5F307 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503E214F1F49E00C5F307 /* CoreGraphics.framework */; };
@@ -32,6 +33,8 @@
 		4E05D4C014F72D76004065B3 /* OptionGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionGroup.h; sourceTree = "<group>"; };
 		4E05D4C114F72D76004065B3 /* OptionGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionGroup.m; sourceTree = "<group>"; };
 		4E55379614F3439A00DCDEFE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4EB5BC1414F94C5800232A33 /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; path = LocationTracker.h; sourceTree = "<group>"; };
+		4EB5BC1514F94C5800232A33 /* LocationTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTracker.m; sourceTree = "<group>"; };
 		4EE503DA14F1F49E00C5F307 /* LocationTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE503DE14F1F49E00C5F307 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4EE503E014F1F49E00C5F307 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -70,6 +73,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4EB5BC1114F94BEB00232A33 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				4EE5040614F1F65200C5F307 /* ControlViewController.h */,
+				4EE5040714F1F65200C5F307 /* ControlViewController.m */,
+				4EE5040914F1FCB400C5F307 /* OptionsViewController.h */,
+				4EE5040A14F1FCB400C5F307 /* OptionsViewController.m */,
+				4E02134E14F4B27E006304E6 /* Option.h */,
+				4E02134F14F4B27E006304E6 /* Option.m */,
+				4E05D4C014F72D76004065B3 /* OptionGroup.h */,
+				4E05D4C114F72D76004065B3 /* OptionGroup.m */,
+			);
+			name = Controls;
+			sourceTree = "<group>";
+		};
+		4EB5BC1314F94C3400232A33 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				4EB5BC1414F94C5800232A33 /* LocationTracker.h */,
+				4EB5BC1514F94C5800232A33 /* LocationTracker.m */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
 		4EE503CF14F1F49E00C5F307 = {
 			isa = PBXGroup;
 			children = (
@@ -101,10 +128,10 @@
 		4EE503E414F1F49E00C5F307 /* LocationTester */ = {
 			isa = PBXGroup;
 			children = (
+				4EB5BC1114F94BEB00232A33 /* Controls */,
+				4EB5BC1314F94C3400232A33 /* Location */,
 				4EE503ED14F1F49E00C5F307 /* AppDelegate.h */,
 				4EE503EE14F1F49E00C5F307 /* AppDelegate.m */,
-				4EE5040614F1F65200C5F307 /* ControlViewController.h */,
-				4EE5040714F1F65200C5F307 /* ControlViewController.m */,
 				4EE503F014F1F49E00C5F307 /* MainStoryboard.storyboard */,
 				4EE503F614F1F49E00C5F307 /* first.png */,
 				4EE503F814F1F49E00C5F307 /* first@2x.png */,
@@ -113,12 +140,6 @@
 				4EE503FD14F1F49E00C5F307 /* second.png */,
 				4EE503FF14F1F49E00C5F307 /* second@2x.png */,
 				4EE503E514F1F49E00C5F307 /* Supporting Files */,
-				4EE5040914F1FCB400C5F307 /* OptionsViewController.h */,
-				4EE5040A14F1FCB400C5F307 /* OptionsViewController.m */,
-				4E02134E14F4B27E006304E6 /* Option.h */,
-				4E02134F14F4B27E006304E6 /* Option.m */,
-				4E05D4C014F72D76004065B3 /* OptionGroup.h */,
-				4E05D4C114F72D76004065B3 /* OptionGroup.m */,
 			);
 			path = LocationTester;
 			sourceTree = "<group>";
@@ -207,6 +228,7 @@
 				4EE5040B14F1FCB400C5F307 /* OptionsViewController.m in Sources */,
 				4E02135014F4B27E006304E6 /* Option.m in Sources */,
 				4E05D4C214F72D76004065B3 /* OptionGroup.m in Sources */,
+				4EB5BC1614F94C5800232A33 /* LocationTracker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

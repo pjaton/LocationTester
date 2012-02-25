@@ -7,8 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "LocationTracker.h"
+#import "ControlViewController.h"
 
-@implementation AppDelegate
+@implementation AppDelegate {
+    LocationTracker * tracker;
+}
 
 @synthesize window = _window;
 
@@ -17,6 +21,46 @@
 
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey]) {
         DNSInfo(@"started from location");
+    } else {
+        
+        NSString *path = [NSString stringWithFormat:@"%@/%@.%@", [[NSBundle mainBundle] bundlePath], LOCATIONS_FILE, LOCATIONS_FILE_TYPE];
+        DNSInfo(@"Path to location file: %@", path);
+        if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+            DNSInfo(@"Creating locations log file");
+            NSDate *date = [NSDate date];
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            [dateFormat setDateFormat:@"yyyy/MM/dd hh:mm aaa"];
+            NSString *content = [NSString stringWithFormat:@"Location Tracker Log\n%@\n-------------------", [dateFormat stringFromDate:date]];
+            [content writeToFile:path
+                      atomically:NO 
+                        encoding:NSStringEncodingConversionAllowLossy 
+                           error:nil];
+        }
+        
+        
+        
+        
+        /*
+         
+         NSString *content = @"One\nTwo\nThree\nFour\nFive";
+         //save content to the documents directory
+         [content writeToFile:fileName
+         atomically:NO 
+         encoding:NSStringEncodingConversionAllowLossy 
+         error:nil];
+         
+         NSString* path = [[NSBundle mainBundle] pathForResource:@"locations" ofType:@"log"];
+         */
+        
+        
+        
+        if (nil == tracker) {
+            tracker = [[LocationTracker alloc] init];
+        }
+        
+        UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+        ControlViewController *controlViewController = [[tabBarController viewControllers] objectAtIndex:0];
+        [controlViewController setTracker:tracker];
     }
 
     

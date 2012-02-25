@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "OptionsViewController.h"
+#import "LocationTracker.h"
 
-@interface ControlViewController : UITableViewController<CLLocationManagerDelegate, UIAlertViewDelegate, OptionsViewControllerDelegate>
+@interface ControlViewController : UITableViewController<LocationTrackerDelegate, UIAlertViewDelegate, OptionsViewControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UISwitch *locationSwitch;
 @property (nonatomic, strong) IBOutlet UILabel  *locationOptionsLabel;
@@ -20,6 +21,7 @@
 @property (nonatomic, strong) IBOutlet UILabel  *regionOptionsLabel;
 @property (nonatomic, strong) IBOutlet UISwitch *significantChangeSwitch;
 @property (nonatomic, strong) IBOutlet UILabel  *significantChangelabel;
+@property (nonatomic, strong) LocationTracker *tracker;
 
 - (IBAction)locationSwitched;
 - (IBAction)significantChangeSwitched;

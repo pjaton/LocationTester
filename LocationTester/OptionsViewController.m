@@ -26,8 +26,13 @@
 {
     [self.picker selectRow:self.firstOptions.selected inComponent:0 animated:NO];
     [self.picker selectRow:self.secondOptions.selected inComponent:1 animated:NO];
-    self.label.text = self.message;
+    [self.label setText:self.message];
     [super viewDidLoad];
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -44,9 +49,9 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     if (component == 0) {
-        return [self.firstOptions size];
+        return self.firstOptions.size;
     }
-    return [self.secondOptions size];
+    return self.secondOptions.size;
 }
 
 
@@ -69,13 +74,9 @@
     NSInteger firstIndex = [self.picker selectedRowInComponent:0];
     NSInteger secondIndex = [self.picker selectedRowInComponent:1];
     BOOL changed = (firstIndex != self.firstOptions.selected) || (secondIndex != self.secondOptions.selected);
-    self.firstOptions.selected = firstIndex;
-    self.secondOptions.selected = secondIndex;
-    [self.delegate updateOption:self withChanges:changed];
+    [self.firstOptions setSelected:firstIndex];
+    [self.secondOptions setSelected:secondIndex];
+    [self.delegate optionsController:self updatedWithChanges:changed];
 }
 
-- (void)viewDidUnload {
-    [self setLabel:nil];
-    [super viewDidUnload];
-}
 @end

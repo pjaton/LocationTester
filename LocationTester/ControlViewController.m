@@ -9,7 +9,6 @@
 #import "ControlViewController.h"
 
 @implementation ControlViewController {
-    CLLocationManager * locationManager;  
     OptionGroup * locationDistanceOptions;
     OptionGroup * locationAccuracyOptions;
     OptionGroup * regionRadiusOptions;
@@ -24,16 +23,19 @@
 @synthesize regionOptionsLabel = _regionOptionsLabel;
 @synthesize significantChangeSwitch = _significantChangeSwitch;
 @synthesize significantChangelabel = _significantChangelabel;
+@synthesize tracker = _tracker;
+
+- (void)setTracker:(LocationTracker *)tracker
+{
+    _tracker = tracker;
+    [_tracker setDelegate:self];
+}
+
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
-    if (locationManager == nil) {
-        locationManager = [[CLLocationManager alloc] init];
-    }
-    locationManager.delegate = self;
-    
     if (locationDistanceOptions == nil) {
         locationDistanceOptions = [OptionGroup optionGroupWithOption:
                                    [[NSArray alloc] initWithObjects:
@@ -90,7 +92,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    locationManager = nil;
     locationDistanceOptions = nil;
     locationAccuracyOptions = nil;
     regionRadiusOptions = nil;
@@ -106,18 +107,18 @@
 {
 	if ([segue.identifier isEqualToString:@"LocationsOptions"]) {
         OptionsViewController *ctrl = segue.destinationViewController;
-        ctrl.delegate = self;
-        ctrl.control = segue.identifier;
-        ctrl.message = @"Define the location filter & accuracy";
-        ctrl.firstOptions = locationDistanceOptions;
-        ctrl.secondOptions = locationAccuracyOptions;
+        [ctrl setDelegate:self];
+        [ctrl setControl:segue.identifier];
+        [ctrl setMessage:@"Define the location filter & accuracy"];
+        [ctrl setFirstOptions:locationDistanceOptions];
+        [ctrl setSecondOptions:locationAccuracyOptions];
 	} else if ([segue.identifier isEqualToString:@"RegionOptions"]) {
         OptionsViewController *ctrl = segue.destinationViewController;
-        ctrl.delegate = self;
-        ctrl.control = segue.identifier;
-        ctrl.message = @"Define the region radius & accuracy";
-        ctrl.firstOptions = regionRadiusOptions;
-        ctrl.secondOptions = regionAccuracyOptions;
+        [ctrl setDelegate:self];
+        [ctrl setControl:segue.identifier];
+        [ctrl setMessage:@"Define the region radius & accuracy"];
+        [ctrl setFirstOptions:regionRadiusOptions];
+        [ctrl setSecondOptions:regionAccuracyOptions];
     }
 }
 
@@ -126,25 +127,35 @@
 
 - (IBAction)locationSwitched
 {
-    DNSInfo(@"%d", self.locationSwitch.isOn);
+    if (self.locationSwitch.isOn) {
+        [self.tracker startMonitoringLocation:locationDistanceOptions.selectedOption.value 
+                                     accuracy:locationAccuracyOptions.selectedOption.value];
+    } else {
+        [self.tracker stopMonitoringLocation];
+    }
 }
 
 - (void)locationControls:(BOOL)enabled
 {
     if (enabled) {
-        self.locationSwitch.hidden = NO;
-        self.locationLabel.text = @"Monitoring";
+        [self.locationSwitch setHidden:NO];
+        [self.locationLabel setText:@"Monitoring"];
     } else {
-        self.locationSwitch.hidden = YES;
-        self.locationLabel.text = @"Monitoring currently disabled";
+        [self.locationSwitch setHidden:YES];
+        [self.locationLabel setText:@"Monitoring currently disabled"];
     }
 }
 
 - (void)applyLocationOptions
 {
-    self.locationOptionsLabel.text = [NSString stringWithFormat:@"Filter %@ (%@)", 
-                                      [[locationDistanceOptions selectedOption] label], 
-                                      [[locationAccuracyOptions selectedOption] label]];
+    [self.locationOptionsLabel setText:[NSString stringWithFormat:@"Filter %@ (%@)", 
+                                        [[locationDistanceOptions selectedOption] label], 
+                                        [[locationAccuracyOptions selectedOption] label]]];
+    if (self.locationSwitch.isOn) {
+        [self.tracker stopMonitoringLocation];
+        [self.tracker startMonitoringLocation:locationDistanceOptions.selectedOption.value 
+                                     accuracy:locationAccuracyOptions.selectedOption.value];
+    }
 }
 
 
@@ -158,11 +169,11 @@
 - (void)significantChangeControls:(BOOL)enabled
 {
     if (enabled) {
-        self.significantChangeSwitch.hidden = NO;
-        self.significantChangelabel.text = @"Monitoring";
+        [self.significantChangeSwitch setHidden:NO];
+        [self.significantChangelabel setText:@"Monitoring"];
     } else {
-        self.significantChangeSwitch.hidden = YES;
-        self.significantChangelabel.text = @"Monitoring currently disabled";
+        [self.significantChangeSwitch setHidden:YES];
+        [self.significantChangelabel setText:@"Monitoring currently disabled"];
     }
 }
 
@@ -176,70 +187,20 @@
 - (void)regionControls:(BOOL)enabled
 {
     if (enabled) {
-        self.regionSwitch.hidden = NO;
-        self.regionLabel.text = @"Monitoring";
+        [self.regionSwitch setHidden:NO];
+        [self.regionLabel setText:@"Monitoring"];
     } else {
-        self.regionSwitch.hidden = YES;
-        self.regionLabel.text = @"Monitoring currently disabled";
+        [self.regionSwitch setHidden:YES];
+        [self.regionLabel setText:@"Monitoring currently disabled"];
     }
 }
 
 - (void)applyRegionOptions
 {
-    self.regionOptionsLabel.text = [NSString stringWithFormat:@"Radius of %@ (%@)", 
-                                    [[regionRadiusOptions selectedOption] label], 
-                                    [[regionAccuracyOptions selectedOption] label]];
+    [self.regionOptionsLabel setText:[NSString stringWithFormat:@"Radius of %@ (%@)", 
+                                      [[regionRadiusOptions selectedOption] label], 
+                                      [[regionAccuracyOptions selectedOption] label]]];
 }
-
-
-
-#pragma mark - Location Manager delegate
-
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    
-    DNSInfo(@"%@", [newLocation description]);
-}
-
-
-
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
-{
-
-    // the user has explicitly denied authorization for this application, 
-    // or location services are disabled in Settings
-    if (status == kCLAuthorizationStatusDenied) {
-        [self locationControls:NO];
-        [self significantChangeControls:NO];
-        [self regionControls:NO];
-
-        UIAlertView *debugAlert = [[UIAlertView alloc] initWithTitle:@"This App. Requires the Location Services to Determine Your Location" message:nil delegate:self cancelButtonTitle:@"Settings" otherButtonTitles:@"Cancel", nil];
-        [debugAlert show];
-    }
-    
-    // this application is not authorized to use location services due
-    // to active restrictions on location services, the user cannot change
-    // this status, and may not have personally denied authorization
-    else if (status == kCLAuthorizationStatusRestricted) {
-        [self locationControls:NO];
-        [self significantChangeControls:NO];
-        [self regionControls:NO];
-        
-        UIAlertView *debugAlert = [[UIAlertView alloc] initWithTitle:@"Services Restricted" message:@"The location services are currently restricted on this device! Please try again later." delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
-        [debugAlert show];
-        
-    }
-    
-    // the user has either not made a choice with regards to this application
-    // or (s)he has authorized it to user the location services
-    else {
-        [self locationControls:YES];
-        [self significantChangeControls:[CLLocationManager significantLocationChangeMonitoringAvailable]];
-        [self regionControls:[CLLocationManager regionMonitoringAvailable] && [CLLocationManager regionMonitoringEnabled] && (locationManager.maximumRegionMonitoringDistance > 0)];
-    }
-}
-
 
 
 #pragma mark - Alert View delegate
@@ -255,7 +216,7 @@
 
 #pragma mark - Region Options controller delegate
 
-- (void)updateOption:(OptionsViewController *)controller withChanges:(BOOL)changed;
+- (void)optionsController:(OptionsViewController *)controller updatedWithChanges:(BOOL)changed
 {
     if (changed) {
         if ([controller.control isEqualToString:@"LocationsOptions"]) {
@@ -268,5 +229,22 @@
 }
 
 
+
+
+
+#pragma mark - Location Tracker delegate
+
+- (void)locationtracker:(LocationTracker *)tracker authorizationChanged:(BOOL)authorize
+{
+    if (authorize) {
+        [self locationControls:YES];
+        [self significantChangeControls:[CLLocationManager significantLocationChangeMonitoringAvailable]];
+        [self regionControls:[CLLocationManager regionMonitoringAvailable] && [CLLocationManager regionMonitoringEnabled]];
+    } else {
+        [self locationControls:NO];
+        [self significantChangeControls:NO];
+        [self regionControls:NO];
+    }
+}
 
 @end
