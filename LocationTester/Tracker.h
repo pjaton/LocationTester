@@ -17,5 +17,6 @@
 
 - (void) log:(NSString *)message;
 - (void) reportLocation:(CLLocation *)location withMessage:(NSString *)message;
+- (void) reportLocation:(CLLocation *)location withMessage:(NSString *)message andNotify:(BOOL)notify;
 
 @end

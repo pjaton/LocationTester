@@ -36,6 +36,7 @@
     for (CLRegion *region in regions) {
         if ([region.identifier isEqualToString:REGION_ID]) {
             [locationManager stopMonitoringForRegion:region];
+            DNSInfo(@"Stop monitoring region: %@", region);
         }
     }
 }
@@ -53,23 +54,24 @@
     if (abs(howRecent) < 15.0) {
         [manager stopUpdatingLocation];
         CLRegion *region = [[CLRegion alloc] initCircularRegionWithCenter:newLocation.coordinate radius:radius identifier:REGION_ID];
+        DNSInfo(@"Start monitoring region: %@", region);
         [locationManager startMonitoringForRegion:region desiredAccuracy:accuracy];
         
     } else {
-        DNSInfo(@"Ignore old location: %@", [newLocation description]);
+        DNSInfo(@"Ignore old location for region: %@", [newLocation description]);
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
-    DNSNotify(@"We enter the region!\n%@", [[manager location] description]);
+    [self reportLocation:[manager location] withMessage:@"Enter region" andNotify:YES];
     [locationManager startMonitoringForRegion:region desiredAccuracy:kCLLocationAccuracyBest];
     
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
-    DNSNotify(@"We left the region!\n%@", [[manager location] description]);
+    [self reportLocation:[manager location] withMessage:@"Exit region" andNotify:YES];
     CLRegion *newRegion = [[CLRegion alloc] initCircularRegionWithCenter:[[manager location] coordinate] radius:20 identifier:REGION_ID];
     [locationManager startMonitoringForRegion:newRegion desiredAccuracy:kCLLocationAccuracyBest];
     

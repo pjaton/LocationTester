@@ -26,7 +26,7 @@
 {
     NSString* path = [[NSBundle mainBundle] pathForResource:LOCATIONS_FILE ofType:LOCATIONS_FILE_TYPE];
     NSFileHandle *file = [NSFileHandle fileHandleForUpdatingAtPath:path];
-    NSData *data = [[NSString stringWithFormat:@"\n%@", message] dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
     [file seekToEndOfFile];
     [file writeData: data];
     [file closeFile];
@@ -35,9 +35,22 @@
 
 - (void) reportLocation:(CLLocation *)location withMessage:(NSString *)message
 {
-    [self log:[location description]];
-    DNSNotify(@"Location: %+.6f, %+.6f\n", location.coordinate.latitude, location.coordinate.longitude);
+    [self reportLocation:location withMessage:message andNotify:NO];
+}
 
+- (void) reportLocation:(CLLocation *)location withMessage:(NSString *)message andNotify:(BOOL)notify
+{
+    NSString *msg = [NSString stringWithFormat:@"\n%@: %@", message, [location description]];
+    [self log:msg];
+    if (notify) {
+        UILocalNotification *notification = [[UILocalNotification alloc] init];
+        if (notification) {
+            notification.alertBody = [NSString stringWithFormat:@"\n%@: %+.6f, %+.6f", message, location.coordinate.latitude, location.coordinate.longitude];
+            notification.soundName = UILocalNotificationDefaultSoundName;
+            [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+        }
+    }
+    DNSInfo(@"%@",msg);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
