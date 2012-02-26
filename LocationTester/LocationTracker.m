@@ -74,7 +74,7 @@
     // application or (s)he has authorized it to user the location services
     
     if (nil != self.delegate) {
-        [self.delegate locationtracker:self authorizationChanged:authorized];
+        [self.delegate trackerAuthorizationChanged:authorized];
     }
     
 }

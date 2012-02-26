@@ -9,9 +9,9 @@
 
 @class LocationTracker;
 
-@protocol LocationTrackerDelegate <NSObject>
+@protocol TrackerAvailabilityDelegate <NSObject>
 
-- (void)locationtracker:(LocationTracker *)tracker authorizationChanged:(BOOL)authorize;
+- (void)trackerAuthorizationChanged:(BOOL)authorized;
 
 @end
 
@@ -21,7 +21,7 @@
 
 @interface LocationTracker : Tracker<UIAlertViewDelegate>
 
-@property (nonatomic, weak) id <LocationTrackerDelegate> delegate;
+@property (nonatomic, weak) id <TrackerAvailabilityDelegate> delegate;
 
 
 - (void)startMonitoring:(CLLocationDistance)distance accuracy:(CLLocationAccuracy)accuracy;

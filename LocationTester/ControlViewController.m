@@ -223,9 +223,9 @@
 
 #pragma mark - Location Tracker delegate
 
-- (void)locationtracker:(LocationTracker *)tracker authorizationChanged:(BOOL)authorize
+- (void)trackerAuthorizationChanged:(BOOL)authorized;
 {
-    if (authorize) {
+    if (authorized) {
         [self locationControls:YES];
         [self significantChangeControls:[CLLocationManager significantLocationChangeMonitoringAvailable]];
         [self regionControls:[CLLocationManager regionMonitoringAvailable] && [CLLocationManager regionMonitoringEnabled]];

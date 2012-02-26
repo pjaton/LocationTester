@@ -11,7 +11,7 @@
 #import "OptionsViewController.h"
 #import "LocationTracker.h"
 
-@interface ControlViewController : UITableViewController<LocationTrackerDelegate, OptionsViewControllerDelegate>
+@interface ControlViewController : UITableViewController<TrackerAvailabilityDelegate, OptionsViewControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UISwitch *locationSwitch;
 @property (nonatomic, strong) IBOutlet UILabel  *locationOptionsLabel;
