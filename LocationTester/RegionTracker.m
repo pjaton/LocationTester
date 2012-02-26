@@ -20,7 +20,6 @@
 {
     radius = newRadius;
     accuracy = newAccuracy;
-    DNSInfo(@"Start monitoring region (radius %.0fm, accuracy: %.0fm)", newRadius, newAccuracy);
     
     // we use the radius and accuracy option to establish first the center of the
     // region. Once this center is established, we will start the true monitoring
@@ -33,7 +32,6 @@
 
 - (void)stopMonitoring 
 {
-    DNSInfo(@"Stop monitoring region");
     NSSet *regions = [locationManager monitoredRegions];
     for (CLRegion *region in regions) {
         if ([region.identifier isEqualToString:REGION_ID]) {
@@ -56,6 +54,7 @@
         [manager stopUpdatingLocation];
         CLRegion *region = [[CLRegion alloc] initCircularRegionWithCenter:newLocation.coordinate radius:radius identifier:REGION_ID];
         [locationManager startMonitoringForRegion:region desiredAccuracy:accuracy];
+        
     } else {
         DNSInfo(@"Ignore old location: %@", [newLocation description]);
     }

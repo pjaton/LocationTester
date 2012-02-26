@@ -10,6 +10,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import "OptionsViewController.h"
 #import "LocationTracker.h"
+#import "SignificantChangeTracker.h"
+#import "RegionTracker.h"
 
 @interface ControlViewController : UITableViewController<TrackerAvailabilityDelegate, OptionsViewControllerDelegate>
 
@@ -21,7 +23,10 @@
 @property (nonatomic, strong) IBOutlet UILabel  *regionOptionsLabel;
 @property (nonatomic, strong) IBOutlet UISwitch *significantChangeSwitch;
 @property (nonatomic, strong) IBOutlet UILabel  *significantChangelabel;
-@property (nonatomic, strong) LocationTracker *tracker;
+
+@property (nonatomic, strong) LocationTracker *locationTracker;
+@property (nonatomic, strong) SignificantChangeTracker *significantChangeTracker;
+@property (nonatomic, strong) RegionTracker *regionTracker;
 
 - (IBAction)locationSwitched;
 - (IBAction)significantChangeSwitched;

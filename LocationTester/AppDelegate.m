@@ -8,10 +8,14 @@
 
 #import "AppDelegate.h"
 #import "LocationTracker.h"
+#import "SignificantChangeTracker.h"
+#import "RegionTracker.h"
 #import "ControlViewController.h"
 
 @implementation AppDelegate {
-    LocationTracker * tracker;
+    LocationTracker *locationTracker;
+    SignificantChangeTracker *significantChangeTracker;
+    RegionTracker *regionTracker;
 }
 
 @synthesize window = _window;
@@ -19,8 +23,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
+    if (nil == significantChangeTracker) {
+        significantChangeTracker = [[SignificantChangeTracker alloc] init];
+    }
+    if (nil == regionTracker) {
+        regionTracker = [[RegionTracker alloc] init];
+    }
+
+    
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey]) {
         DNSInfo(@"started from location");
+
     } else {
         
         NSString *path = [NSString stringWithFormat:@"%@/%@.%@", [[NSBundle mainBundle] bundlePath], LOCATIONS_FILE, LOCATIONS_FILE_TYPE];
@@ -36,31 +49,20 @@
                         encoding:NSStringEncodingConversionAllowLossy 
                            error:nil];
         }
-        
-        
-        
-        
-        /*
-         
-         NSString *content = @"One\nTwo\nThree\nFour\nFive";
-         //save content to the documents directory
-         [content writeToFile:fileName
-         atomically:NO 
-         encoding:NSStringEncodingConversionAllowLossy 
-         error:nil];
-         
-         NSString* path = [[NSBundle mainBundle] pathForResource:@"locations" ofType:@"log"];
-         */
-        
-        
-        
-        if (nil == tracker) {
-            tracker = [[LocationTracker alloc] init];
+
+        // locations can be monitored only when the application is
+        // in the foreground, which is not the case when the application
+        // has been "awaken" from a location
+        if (nil == locationTracker) {
+            locationTracker = [[LocationTracker alloc] init];
         }
         
         UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
         ControlViewController *controlViewController = [[tabBarController viewControllers] objectAtIndex:0];
-        [controlViewController setTracker:tracker];
+        [locationTracker setDelegate:controlViewController];
+        [controlViewController setLocationTracker:locationTracker];
+        [controlViewController setSignificantChangeTracker:significantChangeTracker];
+        [controlViewController setRegionTracker:regionTracker];
     }
 
     

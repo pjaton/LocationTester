@@ -23,14 +23,9 @@
 @synthesize regionOptionsLabel = _regionOptionsLabel;
 @synthesize significantChangeSwitch = _significantChangeSwitch;
 @synthesize significantChangelabel = _significantChangelabel;
-@synthesize tracker = _tracker;
-
-- (void)setTracker:(LocationTracker *)tracker
-{
-    _tracker = tracker;
-    [_tracker setDelegate:self];
-}
-
+@synthesize locationTracker = _locationTracker;
+@synthesize significantChangeTracker = _significantChangeTracker;
+@synthesize regionTracker = _regionTracker;
 
 #pragma mark - View lifecycle
 
@@ -128,10 +123,10 @@
 - (IBAction)locationSwitched
 {
     if (self.locationSwitch.isOn) {
-        [self.tracker startMonitoring:locationDistanceOptions.selectedOption.value 
+        [self.locationTracker startMonitoring:locationDistanceOptions.selectedOption.value 
                                      accuracy:locationAccuracyOptions.selectedOption.value];
     } else {
-        [self.tracker stopMonitoring];
+        [self.locationTracker stopMonitoring];
     }
 }
 
@@ -151,11 +146,7 @@
     [self.locationOptionsLabel setText:[NSString stringWithFormat:@"Filter %@ (%@)", 
                                         [[locationDistanceOptions selectedOption] label], 
                                         [[locationAccuracyOptions selectedOption] label]]];
-    if (self.locationSwitch.isOn) {
-        [self.tracker stopMonitoring];
-        [self.tracker startMonitoring:locationDistanceOptions.selectedOption.value 
-                                     accuracy:locationAccuracyOptions.selectedOption.value];
-    }
+    [self locationSwitched];
 }
 
 
@@ -163,6 +154,11 @@
 
 - (IBAction)significantChangeSwitched
 {
+    if (self.significantChangeSwitch.isOn) {
+        [self.significantChangeTracker startMonitoring];
+    } else {
+        [self.significantChangeTracker stopMonitoring];
+    }
 }
 
 
@@ -182,6 +178,12 @@
 
 - (IBAction)regionSwitched
 {
+    if (self.regionSwitch.isOn) {
+        [self.regionTracker startMonitoring:regionRadiusOptions.selectedOption.value 
+                                   accuracy:regionAccuracyOptions.selectedOption.value];
+    } else {
+        [self.regionTracker stopMonitoring];
+    }
 }
 
 - (void)regionControls:(BOOL)enabled
@@ -200,6 +202,7 @@
     [self.regionOptionsLabel setText:[NSString stringWithFormat:@"Radius of %@ (%@)", 
                                       [[regionRadiusOptions selectedOption] label], 
                                       [[regionAccuracyOptions selectedOption] label]]];
+    [self regionSwitched];
 }
 
 

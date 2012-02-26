@@ -17,6 +17,7 @@
 - (void)startMonitoring:(CLLocationDistance)distance accuracy:(CLLocationAccuracy)accuracy 
 {
     DNSInfo(@"Start monitoring location (distance %.0fm, accuracy: %.0fm)", distance, accuracy);
+    [locationManager stopUpdatingLocation];
     [locationManager setDistanceFilter:distance];
     [locationManager setDesiredAccuracy:accuracy];
     [locationManager startUpdatingLocation];

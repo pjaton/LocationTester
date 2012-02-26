@@ -26,7 +26,7 @@
 {
     NSString* path = [[NSBundle mainBundle] pathForResource:LOCATIONS_FILE ofType:LOCATIONS_FILE_TYPE];
     NSFileHandle *file = [NSFileHandle fileHandleForUpdatingAtPath:path];
-    NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [[NSString stringWithFormat:@"\n%@", message] dataUsingEncoding:NSUTF8StringEncoding];
     [file seekToEndOfFile];
     [file writeData: data];
     [file closeFile];
