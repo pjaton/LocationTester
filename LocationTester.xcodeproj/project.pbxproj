@@ -12,6 +12,7 @@
 		4E55379914F345E500DCDEFE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E55379614F3439A00DCDEFE /* CoreLocation.framework */; };
 		4E87A73714F9A5FB003C3809 /* Tracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E87A73614F9A5FB003C3809 /* Tracker.m */; };
 		4E87A73F14F9AAE6003C3809 /* SignificantChangeTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E87A73E14F9AAE6003C3809 /* SignificantChangeTracker.m */; };
+		4E87A74314F9AC2A003C3809 /* RegionTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E87A74214F9AC2A003C3809 /* RegionTracker.m */; };
 		4EB5BC1614F94C5800232A33 /* LocationTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB5BC1514F94C5800232A33 /* LocationTracker.m */; };
 		4EE503DF14F1F49E00C5F307 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503DE14F1F49E00C5F307 /* UIKit.framework */; };
 		4EE503E114F1F49E00C5F307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503E014F1F49E00C5F307 /* Foundation.framework */; };
@@ -39,6 +40,8 @@
 		4E87A73614F9A5FB003C3809 /* Tracker.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = Tracker.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
 		4E87A73D14F9AAE6003C3809 /* SignificantChangeTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignificantChangeTracker.h; sourceTree = "<group>"; };
 		4E87A73E14F9AAE6003C3809 /* SignificantChangeTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignificantChangeTracker.m; sourceTree = "<group>"; };
+		4E87A74114F9AC2A003C3809 /* RegionTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionTracker.h; sourceTree = "<group>"; };
+		4E87A74214F9AC2A003C3809 /* RegionTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionTracker.m; sourceTree = "<group>"; };
 		4EB5BC1414F94C5800232A33 /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTracker.h; sourceTree = "<group>"; };
 		4EB5BC1514F94C5800232A33 /* LocationTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTracker.m; sourceTree = "<group>"; };
 		4EE503DA14F1F49E00C5F307 /* LocationTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +106,8 @@
 				4EB5BC1514F94C5800232A33 /* LocationTracker.m */,
 				4E87A73D14F9AAE6003C3809 /* SignificantChangeTracker.h */,
 				4E87A73E14F9AAE6003C3809 /* SignificantChangeTracker.m */,
+				4E87A74114F9AC2A003C3809 /* RegionTracker.h */,
+				4E87A74214F9AC2A003C3809 /* RegionTracker.m */,
 			);
 			name = Location;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 				4EB5BC1614F94C5800232A33 /* LocationTracker.m in Sources */,
 				4E87A73714F9A5FB003C3809 /* Tracker.m in Sources */,
 				4E87A73F14F9AAE6003C3809 /* SignificantChangeTracker.m in Sources */,
+				4E87A74314F9AC2A003C3809 /* RegionTracker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
