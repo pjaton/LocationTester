@@ -10,8 +10,8 @@
 
 @interface RegionTracker : Tracker
 
-- (void)startMonitoringRegion:(CLLocationDistance)radius accuracy:(CLLocationAccuracy)accuracy;
-- (void)stopMonitoringRegion;
+- (void)startMonitoring:(CLLocationDistance)radius accuracy:(CLLocationAccuracy)accuracy;
+- (void)stopMonitoring;
 
 
 @end

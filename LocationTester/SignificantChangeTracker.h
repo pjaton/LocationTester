@@ -10,7 +10,7 @@
 
 @interface SignificantChangeTracker : Tracker
 
-- (void)startMonitoringSignificantChange;
-- (void)stopMonitoringSignificantChange;
+- (void)startMonitoring;
+- (void)stopMonitoring;
 
 @end

@@ -128,10 +128,10 @@
 - (IBAction)locationSwitched
 {
     if (self.locationSwitch.isOn) {
-        [self.tracker startMonitoringLocation:locationDistanceOptions.selectedOption.value 
+        [self.tracker startMonitoring:locationDistanceOptions.selectedOption.value 
                                      accuracy:locationAccuracyOptions.selectedOption.value];
     } else {
-        [self.tracker stopMonitoringLocation];
+        [self.tracker stopMonitoring];
     }
 }
 
@@ -152,8 +152,8 @@
                                         [[locationDistanceOptions selectedOption] label], 
                                         [[locationAccuracyOptions selectedOption] label]]];
     if (self.locationSwitch.isOn) {
-        [self.tracker stopMonitoringLocation];
-        [self.tracker startMonitoringLocation:locationDistanceOptions.selectedOption.value 
+        [self.tracker stopMonitoring];
+        [self.tracker startMonitoring:locationDistanceOptions.selectedOption.value 
                                      accuracy:locationAccuracyOptions.selectedOption.value];
     }
 }

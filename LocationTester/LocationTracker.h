@@ -24,8 +24,8 @@
 @property (nonatomic, weak) id <LocationTrackerDelegate> delegate;
 
 
-- (void)startMonitoringLocation:(CLLocationDistance)distance accuracy:(CLLocationAccuracy)accuracy;
-- (void)stopMonitoringLocation;
+- (void)startMonitoring:(CLLocationDistance)distance accuracy:(CLLocationAccuracy)accuracy;
+- (void)stopMonitoring;
 
 
 /*

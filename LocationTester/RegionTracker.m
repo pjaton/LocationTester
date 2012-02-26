@@ -16,7 +16,7 @@
 }
 
 
-- (void)startMonitoringRegion:(CLLocationDistance)newRadius accuracy:(CLLocationAccuracy)newAccuracy 
+- (void)startMonitoring:(CLLocationDistance)newRadius accuracy:(CLLocationAccuracy)newAccuracy 
 {
     radius = newRadius;
     accuracy = newAccuracy;
@@ -31,7 +31,7 @@
     
 }
 
-- (void)stopMonitoringRegion 
+- (void)stopMonitoring 
 {
     DNSInfo(@"Stop monitoring region");
     NSSet *regions = [locationManager monitoredRegions];

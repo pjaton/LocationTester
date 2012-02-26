@@ -14,7 +14,7 @@
 @synthesize delegate = _delegate;
 
 
-- (void)startMonitoringLocation:(CLLocationDistance)distance accuracy:(CLLocationAccuracy)accuracy 
+- (void)startMonitoring:(CLLocationDistance)distance accuracy:(CLLocationAccuracy)accuracy 
 {
     DNSInfo(@"Start monitoring location (distance %.0fm, accuracy: %.0fm)", distance, accuracy);
     [locationManager setDistanceFilter:distance];
@@ -23,7 +23,7 @@
     
 }
 
-- (void)stopMonitoringLocation 
+- (void)stopMonitoring 
 {
     DNSInfo(@"Stop monitoring location");
     [locationManager stopUpdatingLocation];

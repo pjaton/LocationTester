@@ -11,14 +11,14 @@
 @implementation SignificantChangeTracker
 
 
-- (void)startMonitoringSignificantChange
+- (void)startMonitoring
 {
     DNSInfo(@"Start monitoring significant change");
     [locationManager startMonitoringSignificantLocationChanges];
     
 }
 
-- (void)stopMonitoringSignificantChange {
+- (void)stopMonitoring {
     DNSInfo(@"Stop monitoring significant change");
     [locationManager stopMonitoringSignificantLocationChanges];
 }
