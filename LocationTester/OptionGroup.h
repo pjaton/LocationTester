@@ -3,7 +3,7 @@
 //  LocationTester
 //
 //  Created by Patrice Jaton on 2/23/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Patrice Jaton. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
