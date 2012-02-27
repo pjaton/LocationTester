@@ -38,7 +38,7 @@
     for (CLRegion *region in regions) {
         if ([region.identifier isEqualToString:REGION_ID]) {
             [locationManager stopMonitoringForRegion:region];
-            DNSInfo(@"Stop monitoring region: %@", region);
+            [self log:[NSString stringWithFormat:@"\nStop monitoring region: <%+.6f, %+.6f> radius %.0fm", region.center.latitude, region.center.longitude, region.radius]];
         }
     }
 }
