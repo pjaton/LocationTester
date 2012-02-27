@@ -56,7 +56,7 @@
     if (abs(howRecent) < 15.0) {
         [manager stopUpdatingLocation];
         CLRegion *region = [[CLRegion alloc] initCircularRegionWithCenter:newLocation.coordinate radius:radius.value identifier:REGION_ID];
-        [self log:[NSString stringWithFormat:@"\nMonitoring first region %@", region]];
+        [self log:[NSString stringWithFormat:@"\nMonitoring region: <%+.6f, %+.6f> radius %.0fm", region.center.latitude, region.center.longitude, region.radius]];
         [locationManager startMonitoringForRegion:region desiredAccuracy:accuracy.value];
         
     } else {
@@ -75,6 +75,7 @@
 {
     [self reportLocation:[manager location] withMessage:@"Exit region" andNotify:YES];
     CLRegion *newRegion = [[CLRegion alloc] initCircularRegionWithCenter:[[manager location] coordinate] radius:20 identifier:REGION_ID];
+    [self log:[NSString stringWithFormat:@"\nMonitoring region: <%+.6f, %+.6f> radius %.0fm", newRegion.center.latitude, newRegion.center.longitude, newRegion.radius]];
     [locationManager startMonitoringForRegion:newRegion desiredAccuracy:kCLLocationAccuracyBest];
     
 }

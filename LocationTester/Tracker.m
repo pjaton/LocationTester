@@ -43,17 +43,26 @@
 
 - (void) reportLocation:(CLLocation *)location withMessage:(NSString *)message andNotify:(BOOL)notify
 {
-    NSString *msg = [NSString stringWithFormat:@"\n%@: %@", message, [location description]];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"hh:mm aaa"];
+
+    NSString *msg = [NSString stringWithFormat:@"\n%@: %@ <%+.6f, %+.6f> (+/-%.0fm)", 
+                     message, 
+                     [dateFormat stringFromDate:location.timestamp],
+                     location.coordinate.latitude,
+                     location.coordinate.longitude,
+                     location.horizontalAccuracy];
+    if (location.altitude > 0) {
+        msg = [NSString stringWithFormat:@"%@ alt: %.2fm (+/-%.0fm)",
+               location.altitude,
+               location.verticalAccuracy];
+    }
     [self log:msg];
 
     if (notify) {
         UILocalNotification *notification = [[UILocalNotification alloc] init];
         if (notification) {
-            notification.alertBody = [NSString stringWithFormat:@"%@\n%+.6f, %+.6f (+/-%.0fm)", 
-                                      message, 
-                                      location.coordinate.latitude, 
-                                      location.coordinate.longitude,
-                                      location.horizontalAccuracy];
+            notification.alertBody = msg;
             notification.soundName = UILocalNotificationDefaultSoundName;
             [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
         }
