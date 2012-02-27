@@ -162,7 +162,7 @@
                             <outlet property="delegate" destination="xbA-LI-DYj" id="geD-ZM-ZyB"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Controls" image="first" id="woc-Ce-grq"/>
+                    <tabBarItem key="tabBarItem" title="Controls" image="control.png" id="woc-Ce-grq"/>
                     <connections>
                         <outlet property="locationLabel" destination="q0F-Bt-XlW" id="pUt-pD-CqT"/>
                         <outlet property="locationOptionsLabel" destination="2ZB-06-v9k" id="cGW-tt-pGc"/>
@@ -249,7 +249,7 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Sv6-jk-zhp"/>
-                                    <barButtonItem title="Email" id="Ckp-ic-o5c">
+                                    <barButtonItem image="email.png" width="45" style="plain" id="Ckp-ic-o5c">
                                         <connections>
                                             <action selector="email:" destination="3" id="Dar-oi-LVp"/>
                                         </connections>
@@ -259,7 +259,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="6"/>
+                    <tabBarItem key="tabBarItem" title="Logs" image="logs.png" id="6"/>
                     <connections>
                         <outlet property="emailButton" destination="Ckp-ic-o5c" id="XgH-t2-1zq"/>
                         <outlet property="logsView" destination="zTf-e8-hzL" id="D8O-mc-tC3"/>
@@ -288,8 +288,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="16" height="16"/>
-        <image name="second" width="16" height="16"/>
+        <image name="control.png" width="26" height="28"/>
+        <image name="email.png" width="24" height="16"/>
+        <image name="logs.png" width="24" height="22"/>
     </resources>
     <classes>
         <class className="ControlViewController" superclassName="UITableViewController">

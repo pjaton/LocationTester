@@ -54,6 +54,7 @@
                      location.horizontalAccuracy];
     if (location.altitude > 0) {
         msg = [NSString stringWithFormat:@"%@ alt: %.2fm (+/-%.0fm)",
+               msg,
                location.altitude,
                location.verticalAccuracy];
     }
