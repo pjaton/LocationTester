@@ -45,10 +45,15 @@
 {
     NSString *msg = [NSString stringWithFormat:@"\n%@: %@", message, [location description]];
     [self log:msg];
+
     if (notify) {
         UILocalNotification *notification = [[UILocalNotification alloc] init];
         if (notification) {
-            notification.alertBody = [NSString stringWithFormat:@"\n%@: %+.6f, %+.6f", message, location.coordinate.latitude, location.coordinate.longitude];
+            notification.alertBody = [NSString stringWithFormat:@"%@\n%+.6f, %+.6f (+/-%.0fm)", 
+                                      message, 
+                                      location.coordinate.latitude, 
+                                      location.coordinate.longitude,
+                                      location.horizontalAccuracy];
             notification.soundName = UILocalNotificationDefaultSoundName;
             [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
         }
