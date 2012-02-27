@@ -35,8 +35,9 @@
         DNSInfo(@"started from location");
 
     } else {
-        
-        NSString *path = [NSString stringWithFormat:@"%@/%@.%@", [[NSBundle mainBundle] bundlePath], LOCATIONS_FILE, LOCATIONS_FILE_TYPE];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *path = [NSString stringWithFormat:@"%@/%@.%@", documentsDirectory, LOCATIONS_FILE, LOCATIONS_FILE_TYPE];
         DNSInfo(@"Path to location file: %@", path);
         if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
             DNSInfo(@"Creating locations log file");

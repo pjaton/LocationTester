@@ -24,7 +24,9 @@
 
 - (void) log:(NSString *)message
 {
-    NSString* path = [[NSBundle mainBundle] pathForResource:LOCATIONS_FILE ofType:LOCATIONS_FILE_TYPE];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [NSString stringWithFormat:@"%@/%@.%@", documentsDirectory, LOCATIONS_FILE, LOCATIONS_FILE_TYPE];
     NSFileHandle *file = [NSFileHandle fileHandleForUpdatingAtPath:path];
     NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
     [file seekToEndOfFile];
