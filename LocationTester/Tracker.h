@@ -8,9 +8,6 @@
 
 #import <CoreLocation/CoreLocation.h>
 
-#define LOCATIONS_FILE @"Locations"
-#define LOCATIONS_FILE_TYPE @"log"
-
 @interface Tracker : NSObject<CLLocationManagerDelegate> {
     CLLocationManager * locationManager;  
 }

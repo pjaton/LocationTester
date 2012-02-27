@@ -12,6 +12,9 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 
+    #define LOCATIONS_FILE @"Locations"
+    #define LOCATIONS_FILE_TYPE @"log"
+
     #ifdef DEBUG
         #define DNSInfo(fmt, ...) NSLog(fmt, ##__VA_ARGS__);
         #define DNSDebug(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);

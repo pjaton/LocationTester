@@ -32,6 +32,7 @@
     [file seekToEndOfFile];
     [file writeData: data];
     [file closeFile];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"logReceived" object:message];
 }
 
 

@@ -44,7 +44,7 @@
             NSDate *date = [NSDate date];
             NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
             [dateFormat setDateFormat:@"yyyy/MM/dd hh:mm aaa"];
-            NSString *content = [NSString stringWithFormat:@"Location Tracker Log\n%@\n-------------------", [dateFormat stringFromDate:date]];
+            NSString *content = [NSString stringWithFormat:@"Location Tracker Log (%@)\n------------------------------------------------------------------", [dateFormat stringFromDate:date]];
             [content writeToFile:path
                       atomically:NO 
                         encoding:NSStringEncodingConversionAllowLossy 
