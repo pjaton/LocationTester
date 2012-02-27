@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface LogViewController : UIViewController
+@interface LogViewController : UIViewController<MFMailComposeViewControllerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextView *logsView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *emailButton;
+
+- (IBAction)reset:(id)sender;
+- (IBAction)email:(id)sender;
 
 @end

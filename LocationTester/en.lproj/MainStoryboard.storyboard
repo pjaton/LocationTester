@@ -233,17 +233,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="zTf-e8-hzL">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="411"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" id="fYb-cb-TES">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Reset" id="jr4-pB-RV4">
+                                        <connections>
+                                            <action selector="reset:" destination="3" id="Z4l-F6-TUA"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Sv6-jk-zhp"/>
+                                    <barButtonItem title="Email" id="Ckp-ic-o5c">
+                                        <connections>
+                                            <action selector="email:" destination="3" id="Dar-oi-LVp"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Second" image="second" id="6"/>
                     <connections>
+                        <outlet property="emailButton" destination="Ckp-ic-o5c" id="XgH-t2-1zq"/>
                         <outlet property="logsView" destination="zTf-e8-hzL" id="D8O-mc-tC3"/>
                     </connections>
                 </viewController>
@@ -273,6 +291,41 @@
         <image name="first" width="16" height="16"/>
         <image name="second" width="16" height="16"/>
     </resources>
+    <classes>
+        <class className="ControlViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ControlViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="locationSwitched"/>
+                <relationship kind="action" name="regionSwitched"/>
+                <relationship kind="action" name="significantChangeSwitched"/>
+                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="locationOptionsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="locationSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="regionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="regionOptionsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="regionSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="significantChangeSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="significantChangelabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="LogViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LogViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="email:"/>
+                <relationship kind="action" name="reset:"/>
+                <relationship kind="outlet" name="emailButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="logsView" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="OptionsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="apply"/>
+                <relationship kind="outlet" name="label" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="picker" candidateClass="UIPickerView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

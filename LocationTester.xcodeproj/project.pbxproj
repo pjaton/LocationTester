@@ -13,6 +13,7 @@
 		4E87A73714F9A5FB003C3809 /* Tracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E87A73614F9A5FB003C3809 /* Tracker.m */; };
 		4E87A73F14F9AAE6003C3809 /* SignificantChangeTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E87A73E14F9AAE6003C3809 /* SignificantChangeTracker.m */; };
 		4E87A74314F9AC2A003C3809 /* RegionTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E87A74214F9AC2A003C3809 /* RegionTracker.m */; };
+		4EB0657814FB273D00E191C2 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EB0657714FB273D00E191C2 /* MessageUI.framework */; };
 		4EB5BC1614F94C5800232A33 /* LocationTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB5BC1514F94C5800232A33 /* LocationTracker.m */; };
 		4EE503DF14F1F49E00C5F307 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503DE14F1F49E00C5F307 /* UIKit.framework */; };
 		4EE503E114F1F49E00C5F307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE503E014F1F49E00C5F307 /* Foundation.framework */; };
@@ -42,6 +43,7 @@
 		4E87A73E14F9AAE6003C3809 /* SignificantChangeTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignificantChangeTracker.m; sourceTree = "<group>"; };
 		4E87A74114F9AC2A003C3809 /* RegionTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionTracker.h; sourceTree = "<group>"; };
 		4E87A74214F9AC2A003C3809 /* RegionTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionTracker.m; sourceTree = "<group>"; };
+		4EB0657714FB273D00E191C2 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4EB5BC1414F94C5800232A33 /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTracker.h; sourceTree = "<group>"; };
 		4EB5BC1514F94C5800232A33 /* LocationTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTracker.m; sourceTree = "<group>"; };
 		4EE503DA14F1F49E00C5F307 /* LocationTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,7 +59,7 @@
 		4EE503F114F1F49E00C5F307 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		4EE503F614F1F49E00C5F307 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		4EE503F814F1F49E00C5F307 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		4EE503FA14F1F49E00C5F307 /* LogViewController.h */ = {isa = PBXFileReference; path = LogViewController.h; sourceTree = "<group>"; };
+		4EE503FA14F1F49E00C5F307 /* LogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
 		4EE503FB14F1F49E00C5F307 /* LogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 		4EE503FD14F1F49E00C5F307 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		4EE503FF14F1F49E00C5F307 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EB0657814FB273D00E191C2 /* MessageUI.framework in Frameworks */,
 				4EE503DF14F1F49E00C5F307 /* UIKit.framework in Frameworks */,
 				4EE503E114F1F49E00C5F307 /* Foundation.framework in Frameworks */,
 				4EE503E314F1F49E00C5F307 /* CoreGraphics.framework in Frameworks */,
@@ -133,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				4E55379614F3439A00DCDEFE /* CoreLocation.framework */,
+				4EB0657714FB273D00E191C2 /* MessageUI.framework */,
 				4EE503DE14F1F49E00C5F307 /* UIKit.framework */,
 				4EE503E014F1F49E00C5F307 /* Foundation.framework */,
 				4EE503E214F1F49E00C5F307 /* CoreGraphics.framework */,
