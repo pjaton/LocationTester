@@ -14,19 +14,19 @@
 @synthesize delegate = _delegate;
 
 
-- (void)startMonitoring:(CLLocationDistance)distance accuracy:(CLLocationAccuracy)accuracy 
+- (void)startMonitoring:(Option *)distance accuracy:(Option *)accuracy
 {
-    DNSInfo(@"Start monitoring location (distance %.0fm, accuracy: %.0fm)", distance, accuracy);
+    [self log:[NSString stringWithFormat:@"\nMonitoring location (distance %@, accuracy: %@)...", distance.label, accuracy.label]];
     [locationManager stopUpdatingLocation];
-    [locationManager setDistanceFilter:distance];
-    [locationManager setDesiredAccuracy:accuracy];
+    [locationManager setDistanceFilter:distance.value];
+    [locationManager setDesiredAccuracy:accuracy.value];
     [locationManager startUpdatingLocation];
     
 }
 
 - (void)stopMonitoring 
 {
-    DNSInfo(@"Stop monitoring location");
+    [self log:@"\nStop monitoring location"];
     [locationManager stopUpdatingLocation];
 }
 
@@ -56,6 +56,7 @@
     // the user has explicitly denied authorization for this application, 
     // or location services are disabled in Settings
     if (status == kCLAuthorizationStatusDenied) {
+        [self log:@"\nLocation monitoring denied by the user!"];
         authorized = NO;
         UIAlertView *debugAlert = [[UIAlertView alloc] initWithTitle:@"This App. Requires the Location Services to Determine Your Location" message:nil delegate:self cancelButtonTitle:@"Settings" otherButtonTitles:@"Cancel", nil];
         [debugAlert show];
@@ -65,11 +66,15 @@
     // to active restrictions on location services, the user cannot change
     // this status, and may not have personally denied authorization
     else if (status == kCLAuthorizationStatusRestricted) {
+        [self log:@"\nLocation monitoring restricted by the system!"];
         authorized = NO;
         UIAlertView *debugAlert = [[UIAlertView alloc] initWithTitle:@"Services Restricted" message:@"The location services are currently restricted on this device! Please try again later." delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
         [debugAlert show];
         
-    }
+    } if (status == kCLAuthorizationStatusAuthorized) {
+        [self log:@"\nLocation monitoring authorized by the user!"];
+    }        
+        
     
     // otherwise, the user has either not made a choice with regards to this 
     // application or (s)he has authorized it to user the location services

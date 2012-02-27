@@ -123,8 +123,8 @@
 - (IBAction)locationSwitched
 {
     if (self.locationSwitch.isOn) {
-        [self.locationTracker startMonitoring:locationDistanceOptions.selectedOption.value 
-                                     accuracy:locationAccuracyOptions.selectedOption.value];
+        [self.locationTracker startMonitoring:locationDistanceOptions.selectedOption 
+                                     accuracy:locationAccuracyOptions.selectedOption];
     } else {
         [self.locationTracker stopMonitoring];
     }
@@ -146,7 +146,11 @@
     [self.locationOptionsLabel setText:[NSString stringWithFormat:@"Filter %@ (%@)", 
                                         [[locationDistanceOptions selectedOption] label], 
                                         [[locationAccuracyOptions selectedOption] label]]];
-    [self locationSwitched];
+    if (self.locationSwitch.isOn) {
+        [self.locationTracker stopMonitoring];
+        [self.locationTracker startMonitoring:locationDistanceOptions.selectedOption 
+                                     accuracy:locationAccuracyOptions.selectedOption];
+    }
 }
 
 
@@ -179,8 +183,8 @@
 - (IBAction)regionSwitched
 {
     if (self.regionSwitch.isOn) {
-        [self.regionTracker startMonitoring:regionRadiusOptions.selectedOption.value 
-                                   accuracy:regionAccuracyOptions.selectedOption.value];
+        [self.regionTracker startMonitoring:regionRadiusOptions.selectedOption 
+                                   accuracy:regionAccuracyOptions.selectedOption];
     } else {
         [self.regionTracker stopMonitoring];
     }
@@ -202,7 +206,11 @@
     [self.regionOptionsLabel setText:[NSString stringWithFormat:@"Radius of %@ (%@)", 
                                       [[regionRadiusOptions selectedOption] label], 
                                       [[regionAccuracyOptions selectedOption] label]]];
-    [self regionSwitched];
+    if (self.regionSwitch.isOn) {
+        [self.regionTracker stopMonitoring];
+        [self.regionTracker startMonitoring:regionRadiusOptions.selectedOption 
+                                   accuracy:regionAccuracyOptions.selectedOption];
+    }
 }
 
 

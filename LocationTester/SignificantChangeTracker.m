@@ -13,13 +13,13 @@
 
 - (void)startMonitoring
 {
-    DNSInfo(@"Start monitoring significant change");
+    [self log:@"\nStart monitoring significant change..."];
     [locationManager startMonitoringSignificantLocationChanges];
     
 }
 
 - (void)stopMonitoring {
-    DNSInfo(@"Stop monitoring significant change");
+    [self log:@"\nStop monitoring significant change"];
     [locationManager stopMonitoringSignificantLocationChanges];
 }
 

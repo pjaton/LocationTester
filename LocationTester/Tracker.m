@@ -58,7 +58,6 @@
             [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
         }
     }
-    DNSInfo(@"%@",msg);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error

@@ -7,10 +7,11 @@
 //
 
 #import "Tracker.h"
+#import "Option.h"
 
 @interface RegionTracker : Tracker
 
-- (void)startMonitoring:(CLLocationDistance)radius accuracy:(CLLocationAccuracy)accuracy;
+- (void)startMonitoring:(Option *)newRadius accuracy:(Option *)newAccuracy;
 - (void)stopMonitoring;
 
 

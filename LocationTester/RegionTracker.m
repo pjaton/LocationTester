@@ -11,21 +11,23 @@
 #define REGION_ID @"LocationTesterRegion"
 
 @implementation RegionTracker {
-    CLLocationDistance radius;
-    CLLocationAccuracy accuracy;
+    Option *radius;
+    Option *accuracy;
 }
 
 
-- (void)startMonitoring:(CLLocationDistance)newRadius accuracy:(CLLocationAccuracy)newAccuracy 
+- (void)startMonitoring:(Option *)newRadius accuracy:(Option *)newAccuracy
 {
     radius = newRadius;
     accuracy = newAccuracy;
     
+    [self log:[NSString stringWithFormat:@"\nResearching region center (radius %@, accuracy: %@)...", radius.label, accuracy.label]];
+    
     // we use the radius and accuracy option to establish first the center of the
     // region. Once this center is established, we will start the true monitoring
     // of the region
-    [locationManager setDistanceFilter:radius];
-    [locationManager setDesiredAccuracy:accuracy];
+    [locationManager setDistanceFilter:radius.value];
+    [locationManager setDesiredAccuracy:accuracy.value];
     [locationManager startUpdatingLocation];
     
 }
@@ -53,9 +55,9 @@
     NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
     if (abs(howRecent) < 15.0) {
         [manager stopUpdatingLocation];
-        CLRegion *region = [[CLRegion alloc] initCircularRegionWithCenter:newLocation.coordinate radius:radius identifier:REGION_ID];
-        DNSInfo(@"Start monitoring region: %@", region);
-        [locationManager startMonitoringForRegion:region desiredAccuracy:accuracy];
+        CLRegion *region = [[CLRegion alloc] initCircularRegionWithCenter:newLocation.coordinate radius:radius.value identifier:REGION_ID];
+        [self log:[NSString stringWithFormat:@"\nMonitoring first region %@", region]];
+        [locationManager startMonitoringForRegion:region desiredAccuracy:accuracy.value];
         
     } else {
         DNSInfo(@"Ignore old location for region: %@", [newLocation description]);

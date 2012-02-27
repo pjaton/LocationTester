@@ -18,19 +18,13 @@
 
 
 #import "Tracker.h"
+#import "Option.h"
 
 @interface LocationTracker : Tracker<UIAlertViewDelegate>
 
 @property (nonatomic, weak) id <TrackerAvailabilityDelegate> delegate;
 
-
-- (void)startMonitoring:(CLLocationDistance)distance accuracy:(CLLocationAccuracy)accuracy;
+- (void)startMonitoring:(Option *)distance accuracy:(Option *)accuracy;
 - (void)stopMonitoring;
-
-
-/*
-+ (LocationTracker *)optionWithLabel:(NSString *)label andValue:(double)value;
-- (LocationTracker *)initWithLabel:(NSString *)label andValue:(double)value;
-*/
 
 @end
