@@ -44,14 +44,15 @@
 - (void) reportLocation:(CLLocation *)location withMessage:(NSString *)message andNotify:(BOOL)notify
 {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"hh:mm aaa"];
+    [dateFormat setDateFormat:@"hh:mmaa"];
 
-    NSString *msg = [NSString stringWithFormat:@"\n%@: %@ <%+.6f, %+.6f> (+/-%.0fm)", 
+    NSString *msg = [NSString stringWithFormat:@"\n%@: %@ <%+.6f, %+.6f> (+/-%.0fm) %.1fkm/h", 
                      message, 
                      [dateFormat stringFromDate:location.timestamp],
                      location.coordinate.latitude,
                      location.coordinate.longitude,
-                     location.horizontalAccuracy];
+                     location.horizontalAccuracy,
+                     location.speed * 3.6];
     if (location.altitude > 0) {
         msg = [NSString stringWithFormat:@"%@ alt: %.2fm (+/-%.0fm)",
                msg,
