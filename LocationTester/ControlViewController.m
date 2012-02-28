@@ -15,6 +15,7 @@
     OptionGroup * regionAccuracyOptions;
 }
 
+@synthesize notificationSwitch = _notificationSwitch;
 @synthesize locationSwitch = _locationSwitch;
 @synthesize locationOptionsLabel = _locationOptionsLabel;
 @synthesize locationLabel = _locationLabel;
@@ -79,13 +80,16 @@
     }
     [self applyRegionOptions];
     [self applyLocationOptions];
-    
-    
+
+//    [self.notificationCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//    [self.notificationCell setUserInteractionEnabled:NO];
     [super viewDidLoad];
 }
 
+
 - (void)viewDidUnload
 {
+    [self setNotificationSwitch:nil];
     [super viewDidUnload];
     locationDistanceOptions = nil;
     locationAccuracyOptions = nil;
@@ -115,6 +119,25 @@
         [ctrl setFirstOptions:regionRadiusOptions];
         [ctrl setSecondOptions:regionAccuracyOptions];
     }
+}
+
+
+
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (indexPath.section == 0) {
+        DNSInfo(@"select section 0");
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (indexPath.section == 0) {
+        DNSInfo(@"deselect section 0");
+    }
+    
 }
 
 
@@ -190,6 +213,12 @@
     }
 }
 
+- (IBAction)notificationSwitched
+{
+    [self.significantChangeTracker setSendNotification:self.notificationSwitch.isOn];
+    [self.regionTracker setSendNotification:self.notificationSwitch.isOn];
+}
+
 - (void)regionControls:(BOOL)enabled
 {
     if (enabled) {
@@ -225,6 +254,7 @@
             [self applyRegionOptions];
         }
     }
+    [self becomeFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

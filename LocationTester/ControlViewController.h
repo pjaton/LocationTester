@@ -15,6 +15,7 @@
 
 @interface ControlViewController : UITableViewController<TrackerAvailabilityDelegate, OptionsViewControllerDelegate>
 
+@property (strong, nonatomic) IBOutlet UISwitch *notificationSwitch;
 @property (nonatomic, strong) IBOutlet UISwitch *locationSwitch;
 @property (nonatomic, strong) IBOutlet UILabel  *locationOptionsLabel;
 @property (nonatomic, strong) IBOutlet UILabel  *locationLabel;
@@ -31,6 +32,7 @@
 - (IBAction)locationSwitched;
 - (IBAction)significantChangeSwitched;
 - (IBAction)regionSwitched;
+- (IBAction)notificationSwitched;
 
 - (void)applyRegionOptions;
 - (void)applyLocationOptions;

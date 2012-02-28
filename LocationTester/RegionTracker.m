@@ -66,14 +66,14 @@
 
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
-    [self reportLocation:[manager location] withMessage:@"Enter region" andNotify:YES];
+    [self reportLocation:[manager location] withMessage:@"Enter region"];
     [locationManager startMonitoringForRegion:region desiredAccuracy:kCLLocationAccuracyBest];
     
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
-    [self reportLocation:[manager location] withMessage:@"Exit region" andNotify:YES];
+    [self reportLocation:[manager location] withMessage:@"Exit region"];
     CLRegion *newRegion = [[CLRegion alloc] initCircularRegionWithCenter:[[manager location] coordinate] radius:radius.value identifier:REGION_ID];
     [locationManager startMonitoringForRegion:newRegion desiredAccuracy:radius.value];
     

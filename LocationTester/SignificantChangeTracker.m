@@ -34,7 +34,7 @@
     NSDate* eventDate = newLocation.timestamp;
     NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
     if (abs(howRecent) < 15.0) {
-        [self reportLocation:newLocation withMessage:@"Significant change" andNotify:YES];
+        [self reportLocation:newLocation withMessage:@"Significant change"];
     } else {
         DNSInfo(@"Ignore old significant location: %@", [newLocation description]);
     }

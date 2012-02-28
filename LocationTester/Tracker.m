@@ -10,6 +10,8 @@
 
 @implementation Tracker
 
+@synthesize sendNotification = _sendNotification;
+
 - (id)init {
     self = [super init];
     if (self) {
@@ -38,11 +40,6 @@
 
 - (void) reportLocation:(CLLocation *)location withMessage:(NSString *)message
 {
-    [self reportLocation:location withMessage:message andNotify:NO];
-}
-
-- (void) reportLocation:(CLLocation *)location withMessage:(NSString *)message andNotify:(BOOL)notify
-{
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"hh:mmaa"];
 
@@ -61,7 +58,7 @@
     }
     [self log:msg];
 
-    if (notify) {
+    if (self.sendNotification) {
         UILocalNotification *notification = [[UILocalNotification alloc] init];
         if (notification) {
             notification.alertBody = msg;
