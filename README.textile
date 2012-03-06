@@ -2,9 +2,20 @@ h1. iOS Location Tester
 
 The goal of this iOS project is to provide a sample app to play with the 3 different types of location monitoring offered by the CoreLocation framework:
 
-* *Location Monitoring* - This foreground-only monitoring is the most powerful (and potentially battery consuming) mode that you can use to monitor the user location
+* *Location Monitoring* - This foreground-only monitoring is the most powerful (and potentially battery consuming) mode that you can use to monitor the user's location
 * *Significant Location Change* - This foreground and background monitoring indicates when a user location significantly simply by firing when (s)he changed to a different cell tower. As this realies on the cell tower, this monitoring cannot be simulated and it requires a device with a cell connectivity (i.e. iPhone or 3G iPage)
 * *Region monitoring* - Since iOS 4, CoreLocation offers region monitoring both in the fore and background. This app. uses the region monitoring the user location in a more precise way (and with different hardware requirement) than the significant location change (see bellow) 
 
-h3. How to use the application?
+
+h2. Why should I use this application?
+
+If you are like me and want to add some location awareness - including some monitoring of the user location when you app is in the background - you might enjoy this application to walk / drive around and test how the CoreLocation framework behave and play with the configuration to fine something that suit your needs. The background aspect is the main one that pushed me to develop this test app. as the simulator mainly offers support for the foreground location monitoring and not much for the significant change and region monitoring. In other words, this application will allow you to go outside and be able to test the monitoring and see what's happening. 
+
+I just hope it will save you time and allow you to focus on the development of your app.
+
+
+h2. License
+
+This application is offered to you "as is", without any guarantee or licensing requirement. You can just go ahead, slice / copy / distribute the code. I would just greatly appreciated if you can point any bugs or improvement. Note that this application has not and is not intended to be approved by Apple. It has not been senctioned by Apple and it does not offer any guarantee in the quality or precision of the location monitoring it perfoms. On the contrary, its goal is to help you experience how the CoreLocation behave in real-life conditions. 
+
 
