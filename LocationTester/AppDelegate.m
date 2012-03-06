@@ -34,41 +34,35 @@
         DNSInfo(@"started from location");
         // nothing else to do, the appropriate location delegate (i.e Tracker) will be called
     } else {
-        UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-        if (localNotification) {
-            UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-            [tabBarController setSelectedIndex:1];
-        } else {
-            NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString *documentsDirectory = [paths objectAtIndex:0];
-            NSString *path = [NSString stringWithFormat:@"%@/%@.%@", documentsDirectory, LOCATIONS_FILE, LOCATIONS_FILE_TYPE];
-            DNSInfo(@"Path to location file: %@", path);
-            if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
-                DNSInfo(@"Creating locations log file");
-                NSDate *date = [NSDate date];
-                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-                [dateFormat setDateFormat:@"yyyy/MM/dd hh:mm aaa"];
-                NSString *content = [NSString stringWithFormat:@"Location Tracker Log (%@)\n------------------------------------------------------------------", [dateFormat stringFromDate:date]];
-                [content writeToFile:path
-                          atomically:NO 
-                            encoding:NSStringEncodingConversionAllowLossy 
-                               error:nil];
-            }
-
-            // locations can be monitored only when the application is
-            // in the foreground, which is not the case when the application
-            // has been "awaken" from a location
-            if (nil == locationTracker) {
-                locationTracker = [[LocationTracker alloc] init];
-            }
-            
-            UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-            ControlViewController *controlViewController = [[tabBarController viewControllers] objectAtIndex:0];
-            [locationTracker setDelegate:controlViewController];
-            [controlViewController setLocationTracker:locationTracker];
-            [controlViewController setSignificantChangeTracker:significantChangeTracker];
-            [controlViewController setRegionTracker:regionTracker];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *path = [NSString stringWithFormat:@"%@/%@.%@", documentsDirectory, LOCATIONS_FILE, LOCATIONS_FILE_TYPE];
+        DNSInfo(@"Path to location file: %@", path);
+        if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+            DNSInfo(@"Creating locations log file");
+            NSDate *date = [NSDate date];
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            [dateFormat setDateFormat:@"yyyy/MM/dd hh:mm aaa"];
+            NSString *content = [NSString stringWithFormat:@"Location Tracker Log (%@)\n------------------------------------------------------------------", [dateFormat stringFromDate:date]];
+            [content writeToFile:path
+                      atomically:NO 
+                        encoding:NSStringEncodingConversionAllowLossy 
+                           error:nil];
         }
+
+        // locations can be monitored only when the application is
+        // in the foreground, which is not the case when the application
+        // has been "awaken" from a location
+        if (nil == locationTracker) {
+            locationTracker = [[LocationTracker alloc] init];
+        }
+        
+        UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+        ControlViewController *controlViewController = [[tabBarController viewControllers] objectAtIndex:0];
+        [locationTracker setDelegate:controlViewController];
+        [controlViewController setLocationTracker:locationTracker];
+        [controlViewController setSignificantChangeTracker:significantChangeTracker];
+        [controlViewController setRegionTracker:regionTracker];
     }
     
     return YES;
