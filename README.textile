@@ -1,0 +1,7 @@
+h1. iOS Location Tester
+The goal of this iOS project is to provide a sample app to play with the 3 different types of location monitoring offered by the CoreLocation framework:
+
+* *Location Monitoring* - This foreground-only monitoring is the most powerful (and potentially battery consuming) mode that you can use to monitor the user location
+* *Significant Location Change* - This foreground and background monitoring indicates when a user location significantly simply by firing when (s)he changed to a different cell tower. As this realies on the cell tower, this monitoring cannot be simulated and it requires a device with a cell connectivity (i.e. iPhone or 3G iPage)
+* *Region monitoring* - Since iOS 4, CoreLocation offers region monitoring both in the fore and background. This app. uses the region monitoring the user location in a more precise way (and with different hardware requirement) than the significant location change. 
+
