@@ -23,8 +23,11 @@ h2. How do I use this app?
 
 Using this application should be, I hope, simple and intuitive. Just open it with Xcode, run it on your favorite device (to install it), configure the monitoring you want to use, take it outside for a walk, bike ride or a drive and see the location changes either by looking at the monitoring logs within the application or by enabling local notifications when running in the background. All of this is control by the two tabs of the app.:
 
-* *Controls* - This tab exposes the configuration of the 3 differents monitorings and this is where you can start and stop each one of them !http://github.com/pjaton/LocationTester/raw/master/README-Controls.png!
-* *Logs* - This tab show you the monitoring logs and it let you reset the logs or email it to yourself !http://github.com/pjaton/LocationTester/raw/master/README-Logs.png!
+* *Controls* - This tab exposes the configuration of the 3 differents monitorings and this is where you can start and stop each one of them
+!=http://github.com/pjaton/LocationTester/raw/master/README-Controls.png!
+
+* *Logs* - This tab show you the monitoring logs and it let you reset the logs or email it to yourself
+!=http://github.com/pjaton/LocationTester/raw/master/README-Logs.png!
 
 
 Note that you can also access the logs from iTunes by selecting this app. in the _File Sharing_ section of the _Apps_ tab when your device is selected.
