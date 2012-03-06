@@ -15,24 +15,16 @@
 
 @interface ControlViewController : UITableViewController<TrackerAvailabilityDelegate, OptionsViewControllerDelegate>
 
-@property (strong, nonatomic) IBOutlet UISwitch *notificationSwitch;
-@property (nonatomic, strong) IBOutlet UISwitch *locationSwitch;
-@property (nonatomic, strong) IBOutlet UILabel  *locationOptionsLabel;
-@property (nonatomic, strong) IBOutlet UILabel  *locationLabel;
-@property (nonatomic, strong) IBOutlet UISwitch *regionSwitch;
-@property (nonatomic, strong) IBOutlet UILabel  *regionLabel;
-@property (nonatomic, strong) IBOutlet UILabel  *regionOptionsLabel;
-@property (nonatomic, strong) IBOutlet UISwitch *significantChangeSwitch;
-@property (nonatomic, strong) IBOutlet UILabel  *significantChangelabel;
+@property (strong, nonatomic) IBOutlet UILabel *notificationCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *locationCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *locationOptionsCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *significantCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *regionCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *regionOptionsCell;
 
-@property (nonatomic, strong) LocationTracker *locationTracker;
-@property (nonatomic, strong) SignificantChangeTracker *significantChangeTracker;
-@property (nonatomic, strong) RegionTracker *regionTracker;
-
-- (IBAction)locationSwitched;
-- (IBAction)significantChangeSwitched;
-- (IBAction)regionSwitched;
-- (IBAction)notificationSwitched;
+@property (strong, nonatomic) LocationTracker *locationTracker;
+@property (strong, nonatomic) SignificantChangeTracker *significantChangeTracker;
+@property (strong, nonatomic) RegionTracker *regionTracker;
 
 - (void)applyRegionOptions;
 - (void)applyLocationOptions;

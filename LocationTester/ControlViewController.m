@@ -15,15 +15,12 @@
     OptionGroup * regionAccuracyOptions;
 }
 
-@synthesize notificationSwitch = _notificationSwitch;
-@synthesize locationSwitch = _locationSwitch;
-@synthesize locationOptionsLabel = _locationOptionsLabel;
-@synthesize locationLabel = _locationLabel;
-@synthesize regionSwitch = _regionSwitch;
-@synthesize regionLabel = _regionLabel;
-@synthesize regionOptionsLabel = _regionOptionsLabel;
-@synthesize significantChangeSwitch = _significantChangeSwitch;
-@synthesize significantChangelabel = _significantChangelabel;
+@synthesize notificationCell = _notificationCell;
+@synthesize locationCell = _locationCell;
+@synthesize locationOptionsCell = _locationOptionsCell;
+@synthesize significantCell = _significantCell;
+@synthesize regionCell = _regionCell;
+@synthesize regionOptionsCell = _regionOptionsCell;
 @synthesize locationTracker = _locationTracker;
 @synthesize significantChangeTracker = _significantChangeTracker;
 @synthesize regionTracker = _regionTracker;
@@ -81,15 +78,12 @@
     [self applyRegionOptions];
     [self applyLocationOptions];
 
-//    [self.notificationCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//    [self.notificationCell setUserInteractionEnabled:NO];
     [super viewDidLoad];
 }
 
 
 - (void)viewDidUnload
 {
-    [self setNotificationSwitch:nil];
     [super viewDidUnload];
     locationDistanceOptions = nil;
     locationAccuracyOptions = nil;
@@ -122,20 +116,62 @@
 }
 
 
-
-
+#pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if (indexPath.section == 0) {
-        DNSInfo(@"select section 0");
+    if (indexPath.row == 0) {
+        switch (indexPath.section) {
+            case 0:
+                // notification
+                [self.significantChangeTracker setSendNotification:YES];
+                [self.regionTracker setSendNotification:YES];
+                break;
+
+            case 1:
+                // location monitoring
+                [self.locationTracker startMonitoring:locationDistanceOptions.selectedOption accuracy:locationAccuracyOptions.selectedOption];
+                break;
+
+            case 2:
+                
+                // significant change monitoring
+                [self.significantChangeTracker startMonitoring];
+                break;
+                
+            case 3:
+                // region monitoring
+                [self.regionTracker startMonitoring:regionRadiusOptions.selectedOption accuracy:regionAccuracyOptions.selectedOption];
+                break;
+        }
     }
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if (indexPath.section == 0) {
-        DNSInfo(@"deselect section 0");
+    if (indexPath.row == 0) {
+        switch (indexPath.section) {
+            case 0:
+                // notification
+                [self.significantChangeTracker setSendNotification:NO];
+                [self.regionTracker setSendNotification:NO];
+                break;
+                
+            case 1:
+                // location monitoring
+                [self.locationTracker stopMonitoring];
+                break;
+                
+            case 2:
+                // significant change monitoring
+                [self.significantChangeTracker stopMonitoring];
+                break;
+                
+            case 3:
+                // region monitoring
+                [self.regionTracker stopMonitoring];
+                break;
+        }
     }
     
 }
@@ -143,33 +179,25 @@
 
 #pragma mark - Location controls
 
-- (IBAction)locationSwitched
-{
-    if (self.locationSwitch.isOn) {
-        [self.locationTracker startMonitoring:locationDistanceOptions.selectedOption 
-                                     accuracy:locationAccuracyOptions.selectedOption];
-    } else {
-        [self.locationTracker stopMonitoring];
-    }
-}
-
 - (void)locationControls:(BOOL)enabled
 {
     if (enabled) {
-        [self.locationSwitch setHidden:NO];
-        [self.locationLabel setText:@"Monitoring"];
+        [self.locationCell setUserInteractionEnabled:YES];
+        [self.locationCell.textLabel setText:@"Monitor (foreground only)"];
     } else {
-        [self.locationSwitch setHidden:YES];
-        [self.locationLabel setText:@"Monitoring currently disabled"];
+        [self.locationTracker stopMonitoring];
+        [self.locationCell setSelected:NO];
+        [self.locationCell setUserInteractionEnabled:NO];
+        [self.locationCell.textLabel setText:@"Monitoring disabled"];
     }
 }
 
 - (void)applyLocationOptions
 {
-    [self.locationOptionsLabel setText:[NSString stringWithFormat:@"Filter %@ (%@)", 
+    [self.locationOptionsCell.textLabel setText:[NSString stringWithFormat:@"Filter %@ (%@)", 
                                         [[locationDistanceOptions selectedOption] label], 
                                         [[locationAccuracyOptions selectedOption] label]]];
-    if (self.locationSwitch.isOn) {
+    if (self.locationCell.isSelected) {
         [self.locationTracker stopMonitoring];
         [self.locationTracker startMonitoring:locationDistanceOptions.selectedOption 
                                      accuracy:locationAccuracyOptions.selectedOption];
@@ -179,63 +207,41 @@
 
 #pragma mark - Significant change controls
 
-- (IBAction)significantChangeSwitched
-{
-    if (self.significantChangeSwitch.isOn) {
-        [self.significantChangeTracker startMonitoring];
-    } else {
-        [self.significantChangeTracker stopMonitoring];
-    }
-}
-
-
 - (void)significantChangeControls:(BOOL)enabled
 {
     if (enabled) {
-        [self.significantChangeSwitch setHidden:NO];
-        [self.significantChangelabel setText:@"Monitoring"];
+        [self.significantCell setUserInteractionEnabled:YES];
+        [self.significantCell.textLabel setText:@"Monitor"];
     } else {
-        [self.significantChangeSwitch setHidden:YES];
-        [self.significantChangelabel setText:@"Monitoring currently disabled"];
+        [self.significantChangeTracker stopMonitoring];
+        [self.significantCell setSelected:NO];
+        [self.significantCell setUserInteractionEnabled:NO];
+        [self.significantCell.textLabel setText:@"Monitoring disabled"];
     }
 }
 
 
 #pragma mark - Region controls
 
-- (IBAction)regionSwitched
-{
-    if (self.regionSwitch.isOn) {
-        [self.regionTracker startMonitoring:regionRadiusOptions.selectedOption 
-                                   accuracy:regionAccuracyOptions.selectedOption];
-    } else {
-        [self.regionTracker stopMonitoring];
-    }
-}
-
-- (IBAction)notificationSwitched
-{
-    [self.significantChangeTracker setSendNotification:self.notificationSwitch.isOn];
-    [self.regionTracker setSendNotification:self.notificationSwitch.isOn];
-}
-
 - (void)regionControls:(BOOL)enabled
 {
     if (enabled) {
-        [self.regionSwitch setHidden:NO];
-        [self.regionLabel setText:@"Monitoring"];
+        [self.regionCell setUserInteractionEnabled:YES];
+        [self.regionCell.textLabel setText:@"Monitor "];
     } else {
-        [self.regionSwitch setHidden:YES];
-        [self.regionLabel setText:@"Monitoring currently disabled"];
+        [self.regionTracker stopMonitoring];
+        [self.regionCell setSelected:NO];
+        [self.regionCell setUserInteractionEnabled:NO];
+        [self.regionCell.textLabel setText:@"Monitoring disabled"];
     }
 }
 
 - (void)applyRegionOptions
 {
-    [self.regionOptionsLabel setText:[NSString stringWithFormat:@"Radius of %@ (%@)", 
+    [self.regionOptionsCell.textLabel setText:[NSString stringWithFormat:@"Radius of %@ (%@)", 
                                       [[regionRadiusOptions selectedOption] label], 
                                       [[regionAccuracyOptions selectedOption] label]]];
-    if (self.regionSwitch.isOn) {
+    if (self.regionCell.isSelected) {
         [self.regionTracker stopMonitoring];
         [self.regionTracker startMonitoring:regionRadiusOptions.selectedOption 
                                    accuracy:regionAccuracyOptions.selectedOption];
