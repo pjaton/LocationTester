@@ -26,7 +26,7 @@ Using this application should be, I hope, simple and intuitive. Just open it wit
 * *Controls* - This tab exposes the configuration of the 3 differents monitorings and this is where you can start and stop each one of them
 * *Logs* - This tab show you the monitoring logs and it let you reset the logs or email it to yourself
 
-!README-Controls.png! !README-Logs.png!
+!https://github.com/pjaton/LocationTester/raw/master/README-Controls.png! !https://github.com/pjaton/LocationTester/raw/master/README-Logs.png!
 
 
 Note that you can also access the logs from iTunes by selecting this app. in the _File Sharing_ section of the _Apps_ tab when your device is selected.
