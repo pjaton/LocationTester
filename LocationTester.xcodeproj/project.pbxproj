@@ -39,8 +39,8 @@
 		4E05D4C114F72D76004065B3 /* OptionGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionGroup.m; sourceTree = "<group>"; };
 		4E3A8AAD14FC9AB100B4050C /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		4E4B02841505C85C009F5955 /* README.textile */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.textile; sourceTree = "<group>"; };
-		4E4B02861505D592009F5955 /* README-Controls.png */ = {isa = PBXFileReference; path = "README-Controls.png"; sourceTree = "<group>"; };
-		4E4B02871505D5BE009F5955 /* README-Logs.png */ = {isa = PBXFileReference; path = "README-Logs.png"; sourceTree = "<group>"; };
+		4E4B02861505D592009F5955 /* README-Controls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "README-Controls.png"; sourceTree = "<group>"; };
+		4E4B02871505D5BE009F5955 /* README-Logs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "README-Logs.png"; sourceTree = "<group>"; };
 		4E55379614F3439A00DCDEFE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4E87A73514F9A5FB003C3809 /* Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = Tracker.h; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
 		4E87A73614F9A5FB003C3809 /* Tracker.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = Tracker.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
@@ -55,6 +55,8 @@
 		4EB0658D14FB3D7C00E191C2 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		4EB5BC1414F94C5800232A33 /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTracker.h; sourceTree = "<group>"; };
 		4EB5BC1514F94C5800232A33 /* LocationTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTracker.m; sourceTree = "<group>"; };
+		4EBE823F15071109000AB9FF /* region-actual.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "region-actual.png"; sourceTree = "<group>"; };
+		4EBE824015071109000AB9FF /* region-expected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "region-expected.png"; sourceTree = "<group>"; };
 		4EE503DA14F1F49E00C5F307 /* LocationTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE503DE14F1F49E00C5F307 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4EE503E014F1F49E00C5F307 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -93,6 +95,8 @@
 		4E4B02851505D568009F5955 /* Readme */ = {
 			isa = PBXGroup;
 			children = (
+				4EBE823F15071109000AB9FF /* region-actual.png */,
+				4EBE824015071109000AB9FF /* region-expected.png */,
 				4E4B02841505C85C009F5955 /* README.textile */,
 				4E4B02861505D592009F5955 /* README-Controls.png */,
 				4E4B02871505D5BE009F5955 /* README-Logs.png */,

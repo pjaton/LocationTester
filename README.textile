@@ -33,4 +33,26 @@ Using this application should be, I hope, simple and intuitive. Just open it wit
 Note that you can also access the logs from iTunes by selecting this app. in the _File Sharing_ section of the _Apps_ tab when your device is selected.
 
 
+h2. Using Region Monitoring to track a user's location
+
+As I mentioned earlier, the Location Monitoring is not available in the background, so how can we track the user location when the app. is running in the background in a more precise fashion than what the significant change offers? While thinking about this challenge, I came up with the idea to use the region monitoring. The concept is super simple:
+
+# when the app. starts monitoring the user's location, use the location monitoring to find the current user location
+# uses this location as the center point for a region with a specified radius and accuracy
+# register this region for monitoring
+# whenever the system fires the fact that the user left the region, record the current location and establish a new region around it
+# replace (by using the same identifier) the region to monitor
+
+This application let you play with this technique, by defining the radius for the region as well as the accuracy. This should allow you to find a proper compromise between your desire for precision and the preservation of the battery life. 
+
+Note that, when run in the background, the accuracy is not guaranteed by the OS and you, most likely, will not get perfect results where each new region is centered at the exact point of exit of the previous region:
+
+!http://github.com/pjaton/LocationTester/raw/master/region-expected.png!
+
+Instead, you will get something like the following where regions are spread over the path of the user:
+
+!http://github.com/pjaton/LocationTester/raw/master/region-actual.png!
+
+
+
 
