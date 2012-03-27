@@ -221,7 +221,7 @@
 		4EE503D114F1F49E00C5F307 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = 4EE503D414F1F49E00C5F307 /* Build configuration list for PBXProject "LocationTester" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -350,7 +350,7 @@
 				GCC_PREFIX_HEADER = "LocationTester/LocationTester-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "LocationTester/LocationTester-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -363,7 +363,7 @@
 				GCC_PREFIX_HEADER = "LocationTester/LocationTester-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "LocationTester/LocationTester-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
